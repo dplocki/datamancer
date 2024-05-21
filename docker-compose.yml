@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  angular-app:
+    image: datamancer
+    build:
+      context: .
+    ports:
+      - "4200:4200"
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+
+  angular-test:
+    image: datamancer
+    build:
+      context: .
+    command: ["npm", "run", "test"]
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+
+  angular-e2e:
+    image: datamancer
+    build:
+      context: .
+    command: ["npm", "run", "e2e"]
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
