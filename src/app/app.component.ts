@@ -26,5 +26,4 @@ export class AppComponent {
     const inputElement = event.target as HTMLTextAreaElement;
     this.inputText = inputElement.value;
   }
-
 }
