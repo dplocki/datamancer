@@ -5,13 +5,20 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   template: `
-    <section>
+    <header></header>
+    <main>
+      <section>
       <form>
         <textarea (input)="onInputChange($event)"></textarea>
         <button class="primary" type="button" (click)="onLoad()">Load</button>
       </form>
-    </section>
+      </section>
+      <aside>
+      </aside>
+    </main>
+    <footer></footer>
   `,
+  styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
   public inputText: string = '';
