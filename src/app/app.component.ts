@@ -1,24 +1,29 @@
 import { Component } from '@angular/core';
+import { HeaderComponent } from "./header/header.component";
+import { FooterComponent } from './footer/footer.component';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [],
-  template: `
-    <header></header>
+    selector: 'app-root',
+    standalone: true,
+    template: `
+    <app-header />
     <main>
       <section>
-      <form>
-        <textarea (input)="onInputChange($event)"></textarea>
-        <button class="primary" type="button" (click)="onLoad()">Load</button>
-      </form>
+        <form>
+          <textarea (input)="onInputChange($event)"></textarea>
+          <button class="primary" type="button" (click)="onLoad()">Load</button>
+        </form>
       </section>
       <aside>
       </aside>
     </main>
-    <footer></footer>
+    <app-footer />
   `,
-  styleUrls: ['app.component.scss'],
+    styleUrls: ['app.component.scss'],
+    imports: [
+      HeaderComponent,
+      FooterComponent
+    ],
 })
 export class AppComponent {
   public inputText: string = '';
