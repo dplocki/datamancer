@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HeaderComponent } from "./header/header.component";
 import { FooterComponent } from './footer/footer.component';
+import { SidePanelComponent } from "./side-panel/side-panel.component";
 
 @Component({
     selector: 'app-root',
@@ -14,16 +15,16 @@ import { FooterComponent } from './footer/footer.component';
           <button class="primary" type="button" (click)="onLoad()">Load</button>
         </form>
       </section>
-      <aside>
-      </aside>
+      <app-side-panel />
     </main>
     <app-footer />
   `,
     styleUrls: ['app.component.scss'],
     imports: [
-      HeaderComponent,
-      FooterComponent
-    ],
+        HeaderComponent,
+        FooterComponent,
+        SidePanelComponent
+    ]
 })
 export class AppComponent {
   public inputText: string = '';
