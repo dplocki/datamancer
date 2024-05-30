@@ -6,4 +6,13 @@ import { Injectable } from '@angular/core';
 export class DatabaseManagerService {
 
   constructor() { }
+
+  public getTablesList() {
+
+  }
+
+  public getTableFields() {
+
+  }
+
 }
