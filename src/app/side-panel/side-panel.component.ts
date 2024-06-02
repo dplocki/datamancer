@@ -10,9 +10,8 @@ import { DatabaseManagerService } from '../services/database-manager.service';
 
 export class DynamicFlatNode {
   constructor(
-    public item: string,
-    public parent: string | null,
-    public isExpandable = false,
+    public label: string,
+    public parent: string | null
   ) { }
 }
 
@@ -23,17 +22,17 @@ export class DynamicDataSource implements DataSource<DynamicFlatNode> {
     private treeControl: FlatTreeControl<DynamicFlatNode>,
     private database: DatabaseManagerService) {
 
-    this.dataSubject.next(this.database.getTablesList().map((tableName: string) => (new DynamicFlatNode(tableName, null, true))));
+    this.dataSubject.next(this.database.getTablesList().map((tableName: string) => (new DynamicFlatNode(tableName, null))));
     this.treeControl.expansionModel.changed
       .subscribe((change: SelectionChange<DynamicFlatNode>) => {
         let result = this.dataSubject.value;
 
         result = result
-          .filter(node => node.parent === null || !change.removed.find(p => p.item === node.parent))
+          .filter(node => node.parent === null || !change.removed.find(p => p.label === node.parent))
           .flatMap(node => {
-            if (change.added.find(p => p.item === node.item)) {
-              return [node].concat(this.database.getTableFields(node.item)
-                .map((fieldName: string) => (new DynamicFlatNode(fieldName, node.item, false))));
+            if (change.added.find(p => p.label === node.label)) {
+              return [node].concat(this.database.getTableFields(node.label)
+                .map((fieldName: string) => (new DynamicFlatNode(fieldName, node.label))));
             }
 
             return node;
@@ -69,9 +68,9 @@ export class SidePanelComponent {
   dataSource: DynamicDataSource;
 
   constructor(database: DatabaseManagerService) {
-    this.treeControl = new FlatTreeControl<DynamicFlatNode>(node => node.parent === null ? 0 : 1, node => node.isExpandable);
+    this.treeControl = new FlatTreeControl<DynamicFlatNode>(node => node.parent === null ? 0 : 1, node => !node.parent);
     this.dataSource = new DynamicDataSource(this.treeControl, database);
   }
 
-  hasChild = (_: number, _nodeData: DynamicFlatNode) => _nodeData.isExpandable;
+  hasChild = (_: number, node: DynamicFlatNode) => !node.parent;
 }
