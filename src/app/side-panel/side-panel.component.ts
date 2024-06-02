@@ -1,17 +1,17 @@
-import { CollectionViewer, DataSource } from '@angular/cdk/collections';
+import { CollectionViewer, DataSource, SelectionChange } from '@angular/cdk/collections';
 import { FlatTreeControl } from '@angular/cdk/tree';
-import { Component, Injectable } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTreeModule } from '@angular/material/tree';
-import { BehaviorSubject, Observable, map, merge, of } from 'rxjs';
+import { BehaviorSubject, Observable, filter, map, of, switchMap } from 'rxjs';
 import { DatabaseManagerService } from '../services/database-manager.service';
 
 export class DynamicFlatNode {
   constructor(
     public item: string,
-    public level = 1,
+    public parent: string | null,
     public isExpandable = false,
   ) { }
 }
@@ -19,23 +19,36 @@ export class DynamicFlatNode {
 export class DynamicDataSource implements DataSource<DynamicFlatNode> {
   private dataSubject = new BehaviorSubject<DynamicFlatNode[]>([]);
 
-  constructor(private database: DatabaseManagerService) {}
+  constructor(
+    private treeControl: FlatTreeControl<DynamicFlatNode>,
+    private database: DatabaseManagerService) {
 
-  connect(collectionViewer: CollectionViewer): Observable<DynamicFlatNode[]> {
-    collectionViewer.viewChange.subscribe(p => console.log('a', p));
+    this.dataSubject.next(this.database.getTablesList().map((tableName: string) => (new DynamicFlatNode(tableName, null, true))));
+    this.treeControl.expansionModel.changed
+      .subscribe((change: SelectionChange<DynamicFlatNode>) => {
+        let result = this.dataSubject.value;
 
-    return of(this.database.getTablesList().map((s: string) => (new DynamicFlatNode(s, 0, true))));
+        result = result
+          .filter(node => node.parent === null || !change.removed.find(p => p.item === node.parent))
+          .flatMap(node => {
+            if (change.added.find(p => p.item === node.item)) {
+              return [node].concat(this.database.getTableFields(node.item)
+                .map((fieldName: string) => (new DynamicFlatNode(fieldName, node.item, false))));
+            }
+
+            return node;
+          });
+
+        this.dataSubject.next(result);
+      });
   }
 
-  disconnect(collectionViewer: CollectionViewer): void {
+  public connect(_collectionViewer: CollectionViewer): Observable<DynamicFlatNode[]> {
+    return this.dataSubject;
+  }
+
+  public disconnect(_collectionViewer: CollectionViewer): void {
     this.dataSubject.complete();
-  }
-
-  loadInitialData(initialData: DynamicFlatNode[]) {
-    this.dataSubject.next(initialData);
-  }
-
-  loadChildren(node: DynamicFlatNode) {
   }
 }
 
@@ -52,17 +65,12 @@ export class DynamicDataSource implements DataSource<DynamicFlatNode> {
   styleUrl: './side-panel.component.scss'
 })
 export class SidePanelComponent {
-
   treeControl: FlatTreeControl<DynamicFlatNode>;
   dataSource: DynamicDataSource;
 
   constructor(database: DatabaseManagerService) {
-    this.treeControl = new FlatTreeControl<DynamicFlatNode>(node => node.level, node => node.isExpandable);
-    this.dataSource = new DynamicDataSource(database);
-
-    this.treeControl.expansionModel.changed.subscribe(change => {
-      console.log('change', change);
-    });
+    this.treeControl = new FlatTreeControl<DynamicFlatNode>(node => node.parent === null ? 0 : 1, node => node.isExpandable);
+    this.dataSource = new DynamicDataSource(this.treeControl, database);
   }
 
   hasChild = (_: number, _nodeData: DynamicFlatNode) => _nodeData.isExpandable;
