@@ -8,7 +8,7 @@ import { MatTreeModule } from '@angular/material/tree';
 import { BehaviorSubject, Observable, filter, map, of, switchMap } from 'rxjs';
 import { DatabaseManagerService } from '../services/database-manager.service';
 
-export class DynamicFlatNode {
+class DynamicFlatNode {
   constructor(
     public label: string,
     public parent: string | null
