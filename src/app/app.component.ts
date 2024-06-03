@@ -15,7 +15,9 @@ import { SidePanelComponent } from "./side-panel/side-panel.component";
           <button class="primary" type="button" (click)="onLoad()">Load</button>
         </form>
       </section>
-      <app-side-panel />
+      <aside>
+        <app-side-panel />
+      </aside>
     </main>
     <app-footer />
   `,

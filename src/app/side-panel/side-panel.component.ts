@@ -5,7 +5,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTreeModule } from '@angular/material/tree';
-import { BehaviorSubject, Observable, filter, map, of, switchMap } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { DatabaseManagerService } from '../services/database-manager.service';
 
 class DynamicFlatNode {
