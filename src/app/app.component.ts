@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { HeaderComponent } from "./header/header.component";
 import { FooterComponent } from './footer/footer.component';
 import { SidePanelComponent } from "./side-panel/side-panel.component";
+import { PanelManagerComponent } from './panel-manager/panel-manager.component';
 
 @Component({
     selector: 'app-root',
@@ -9,12 +10,7 @@ import { SidePanelComponent } from "./side-panel/side-panel.component";
     template: `
     <app-header />
     <main>
-      <section>
-        <form>
-          <textarea (input)="onInputChange($event)"></textarea>
-          <button class="primary" type="button" (click)="onLoad()">Load</button>
-        </form>
-      </section>
+      <app-panel-manager />
       <aside>
         <app-side-panel />
       </aside>
@@ -25,7 +21,8 @@ import { SidePanelComponent } from "./side-panel/side-panel.component";
     imports: [
         HeaderComponent,
         FooterComponent,
-        SidePanelComponent
+        SidePanelComponent,
+        PanelManagerComponent
     ]
 })
 export class AppComponent {

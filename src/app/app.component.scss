@@ -10,10 +10,9 @@ main {
     flex: 1;
     padding: 1em;
 }
-section {
-    flex: 3;
-    padding: 1em;
-}
 aside {
     flex: 1;
+}
+app-panel-manager {
+    flex: 3;
 }
