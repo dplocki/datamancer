@@ -14,4 +14,8 @@ export class PanelComponent {
     const inputElement = event.target as HTMLTextAreaElement;
     this.inputText = inputElement.value;
   }
+
+  public onLoad(): void {
+    console.log(this.inputText);
+  }
 }

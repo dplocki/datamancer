@@ -26,11 +26,7 @@ import { PanelManagerComponent } from './panel-manager/panel-manager.component';
     ]
 })
 export class AppComponent {
-  public inputText: string = '';
 
   title = 'Datamancer';
 
-  public onLoad(): void {
-    console.log(this.inputText);
-  }
 }
