@@ -1,4 +1,7 @@
-<form>
-  <textarea (input)="onInputChange($event)"></textarea>
-  <button class="primary" type="button" (click)="onLoad()">Load</button>
-</form>
+<mat-tab-group>
+  @for (tab of lotsOfTabs; track tab) {
+    <mat-tab [label]="tab">
+      <app-panel />
+    </mat-tab>
+  }
+</mat-tab-group>

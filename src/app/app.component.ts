@@ -33,9 +33,4 @@ export class AppComponent {
   public onLoad(): void {
     console.log(this.inputText);
   }
-
-  public onInputChange(event: Event) {
-    const inputElement = event.target as HTMLTextAreaElement;
-    this.inputText = inputElement.value;
-  }
 }
