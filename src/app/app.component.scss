@@ -1,12 +1,11 @@
 main {
     display: flex;
     flex: 1;
-    padding: 1em;
-    width: 100%;
-    border: 1px solid red;
+    width: 80%;
 }
 aside {
     flex: 1;
+    width: 20%;
 }
 app-panel-manager {
     flex: 1;
