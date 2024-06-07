@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
+import { TableViewComponent } from '../table-view/table-view.component';
 
 @Component({
   selector: 'app-panel',
   standalone: true,
-  imports: [],
+  imports: [
+    TableViewComponent
+  ],
   templateUrl: './panel.component.html',
   styleUrl: './panel.component.scss'
 })
