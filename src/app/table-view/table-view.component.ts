@@ -2,6 +2,7 @@ import { DataSource } from '@angular/cdk/collections';
 import { Component } from '@angular/core';
 import { Observable, ReplaySubject } from 'rxjs';
 import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 export interface PeriodicElement {
   name: string;
@@ -46,7 +47,8 @@ class ExampleDataSource extends DataSource<PeriodicElement> {
   selector: 'app-table-view',
   standalone: true,
   imports: [
-    MatTableModule
+    MatPaginatorModule,
+    MatTableModule,
   ],
   templateUrl: './table-view.component.html',
   styleUrl: './table-view.component.scss'

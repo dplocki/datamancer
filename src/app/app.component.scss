@@ -1,12 +1,22 @@
+:host {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
 main {
-    display: flex;
-    flex: 1;
-    width: 80%;
+  display: flex;
+  flex: 1;
+  width: 80%;
+  flex-direction: row;
 }
+
 aside {
-    flex: 1;
-    width: 20%;
+  flex: 1;
+  width: 20%;
 }
+
 app-panel-manager {
-    flex: 1;
+  flex: 1;
 }
