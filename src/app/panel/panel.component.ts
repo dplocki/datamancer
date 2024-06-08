@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { TableViewComponent } from '../table-view/table-view.component';
+import { QueryComponent } from '../query/query.component';
 
 @Component({
   selector: 'app-panel',
   standalone: true,
   imports: [
-    TableViewComponent
+    QueryComponent,
+    TableViewComponent,
   ],
   templateUrl: './panel.component.html',
   styleUrl: './panel.component.scss'
