@@ -25,7 +25,9 @@ export class DynamicDataSource implements DataSource<DynamicFlatNode> {
     this.database
       .getTablesList()
       .subscribe({
-        next: (values: string[]) => values.map((tableName: string) => (new DynamicFlatNode(tableName, null))),
+        next: (values: string[]) => {
+          this.dataSubject.next(values.map((tableName: string) => (new DynamicFlatNode(tableName, null))));
+        },
       });
 
     this.treeControl.expansionModel.changed
