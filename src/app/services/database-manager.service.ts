@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -21,8 +22,8 @@ export class DatabaseManagerService {
 
   constructor() { }
 
-  public getTablesList(): string[] {
-    return Object.keys(this.database);
+  public getTablesList(): Observable<string[]> {
+    return of(Object.keys(this.database));
   }
 
   public getTableFields(tableName: string): string[] {

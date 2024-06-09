@@ -22,7 +22,12 @@ export class DynamicDataSource implements DataSource<DynamicFlatNode> {
     private treeControl: FlatTreeControl<DynamicFlatNode>,
     private database: DatabaseManagerService) {
 
-    this.dataSubject.next(this.database.getTablesList().map((tableName: string) => (new DynamicFlatNode(tableName, null))));
+    this.database
+      .getTablesList()
+      .subscribe({
+        next: (values: string[]) => values.map((tableName: string) => (new DynamicFlatNode(tableName, null))),
+      });
+
     this.treeControl.expansionModel.changed
       .subscribe((change: SelectionChange<DynamicFlatNode>) => {
         let result = this.dataSubject.value;
