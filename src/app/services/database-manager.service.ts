@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, delay, map, merge, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +23,10 @@ export class DatabaseManagerService {
   constructor() { }
 
   public getTablesList(): Observable<string[]> {
-    return of(Object.keys(this.database));
+    return merge(
+      of(Object.keys(this.database)),
+      of(['cdefgh', 'defghi']).pipe(delay(3000)),
+    );
   }
 
   public getTableFields(tableName: string): string[] {
