@@ -17,6 +17,17 @@ export class DatabaseManagerService {
       'Afield',
       'Bfield',
       'Cfield',
+    ],
+    cdefgh: [
+      'Afield',
+      'Bfield',
+      'Cfield',
+      'Dfield',
+      'Efield',
+    ],
+    defghi: [
+      'Afield',
+      'Bfield',
     ]
   }
 
@@ -24,8 +35,9 @@ export class DatabaseManagerService {
 
   public getTablesList(): Observable<string[]> {
     return merge(
-      of(Object.keys(this.database)),
-      of(['cdefgh', 'defghi']).pipe(delay(3000)),
+      of(Object.keys(this.database).splice(0, 2)),
+      of(Object.keys(this.database).splice(1, 3)).pipe(delay(3000)),
+      of(Object.keys(this.database).splice(2, 2)).pipe(delay(5000))
     );
   }
 
