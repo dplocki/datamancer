@@ -1,0 +1,402 @@
+[
+    {
+      "Name": "Casablanca",
+      "Year": 1942,
+      "Age Rating": "PG",
+      "Duration": "102 mins",
+      "Category": "Drama/Romance",
+      "IMDb Rating": 8
+    },
+    {
+      "Name": "Psycho",
+      "Year": 1960,
+      "Age Rating": "R",
+      "Duration": "109 mins",
+      "Category": "Horror/Thriller",
+      "IMDb Rating": 8
+    },
+    {
+      "Name": "The Godfather",
+      "Year": 1972,
+      "Age Rating": "R",
+      "Duration": "175 mins",
+      "Category": "Crime/Drama",
+      "IMDb Rating": 9
+    },
+    {
+      "Name": "Star Wars: Episode IV - A New Hope",
+      "Year": 1977,
+      "Age Rating": "PG",
+      "Duration": "121 mins",
+      "Category": "Action/Adventure",
+      "IMDb Rating": 8
+    },
+    {
+      "Name": "E.T. the Extra-Terrestrial",
+      "Year": 1982,
+      "Age Rating": "PG",
+      "Duration": "115 mins",
+      "Category": "Family/Sci-Fi",
+      "IMDb Rating": 7
+    },
+    {
+      "Name": "Terminator 2: Judgment Day",
+      "Year": 1991,
+      "Age Rating": "R",
+      "Duration": "137 mins",
+      "Category": "Action/Sci-Fi",
+      "IMDb Rating": 8
+    },
+    {
+      "Name": "Forrest Gump",
+      "Year": 1994,
+      "Age Rating": "PG-13",
+      "Duration": "142 mins",
+      "Category": "Drama/Romance",
+      "IMDb Rating": 8
+    },
+    {
+      "Name": "Titanic",
+      "Year": 1997,
+      "Age Rating": "PG-13",
+      "Duration": "195 mins",
+      "Category": "Drama/Romance",
+      "IMDb Rating": 7
+    },
+    {
+      "Name": "The Matrix",
+      "Year": 1999,
+      "Age Rating": "R",
+      "Duration": "136 mins",
+      "Category": "Action/Sci-Fi",
+      "IMDb Rating": 8
+    },
+    {
+      "Name": "Gladiator",
+      "Year": 2000,
+      "Age Rating": "R",
+      "Duration": "155 mins",
+      "Category": "Action/Drama",
+      "IMDb Rating": 8
+    },
+    {
+      "Name": "The Lord of the Rings: The Fellowship of the Ring",
+      "Year": 2001,
+      "Age Rating": "PG-13",
+      "Duration": "178 mins",
+      "Category": "Adventure/Drama",
+      "IMDb Rating": 8
+    },
+    {
+      "Name": "Spirited Away",
+      "Year": 2001,
+      "Age Rating": "PG",
+      "Duration": "125 mins",
+      "Category": "Animation/Adventure",
+      "IMDb Rating": 8
+    },
+    {
+      "Name": "The Dark Knight",
+      "Year": 2008,
+      "Age Rating": "PG-13",
+      "Duration": "152 mins",
+      "Category": "Action/Crime",
+      "IMDb Rating": 9
+    },
+    {
+      "Name": "Inception",
+      "Year": 2010,
+      "Age Rating": "PG-13",
+      "Duration": "148 mins",
+      "Category": "Action/Adventure",
+      "IMDb Rating": 8
+    },
+    {
+      "Name": "The Avengers",
+      "Year": 2012,
+      "Age Rating": "PG-13",
+      "Duration": "143 mins",
+      "Category": "Action/Adventure",
+      "IMDb Rating": 8
+    },
+    {
+      "Name": "Django Unchained",
+      "Year": 2012,
+      "Age Rating": "R",
+      "Duration": "165 mins",
+      "Category": "Drama/Western",
+      "IMDb Rating": 8
+    },
+    {
+      "Name": "Frozen",
+      "Year": 2013,
+      "Age Rating": "PG",
+      "Duration": "102 mins",
+      "Category": "Animation/Adventure",
+      "IMDb Rating": 7
+    },
+    {
+      "Name": "Interstellar",
+      "Year": 2014,
+      "Age Rating": "PG-13",
+      "Duration": "169 mins",
+      "Category": "Adventure/Drama",
+      "IMDb Rating": 8
+    },
+    {
+      "Name": "The Martian",
+      "Year": 2015,
+      "Age Rating": "PG-13",
+      "Duration": "144 mins",
+      "Category": "Adventure/Sci-Fi",
+      "IMDb Rating": 8
+    },
+    {
+      "Name": "La La Land",
+      "Year": 2016,
+      "Age Rating": "PG-13",
+      "Duration": "128 mins",
+      "Category": "Comedy/Drama",
+      "IMDb Rating": 8
+    },
+    {
+      "Name": "Get Out",
+      "Year": 2017,
+      "Age Rating": "R",
+      "Duration": "104 mins",
+      "Category": "Horror/Mystery",
+      "IMDb Rating": 7
+    },
+    {
+      "Name": "The Shape of Water",
+      "Year": 2017,
+      "Age Rating": "R",
+      "Duration": "123 mins",
+      "Category": "Adventure/Drama",
+      "IMDb Rating": 7
+    },
+    {
+      "Name": "Black Panther",
+      "Year": 2018,
+      "Age Rating": "PG-13",
+      "Duration": "134 mins",
+      "Category": "Action/Adventure",
+      "IMDb Rating": 7
+    },
+    {
+      "Name": "Joker",
+      "Year": 2019,
+      "Age Rating": "R",
+      "Duration": "122 mins",
+      "Category": "Crime/Drama",
+      "IMDb Rating": 8
+    },
+    {
+      "Name": "Parasite",
+      "Year": 2019,
+      "Age Rating": "R",
+      "Duration": "132 mins",
+      "Category": "Comedy/Drama",
+      "IMDb Rating": 8
+    },
+    {
+      "Name": "The Shawshank Redemption",
+      "Year": 1994,
+      "Age Rating": "R",
+      "Duration": "142 mins",
+      "Category": "Drama",
+      "IMDb Rating": 9
+    },
+    {
+      "Name": "Pulp Fiction",
+      "Year": 1994,
+      "Age Rating": "R",
+      "Duration": "154 mins",
+      "Category": "Crime/Drama",
+      "IMDb Rating": 8
+    },
+    {
+      "Name": "Schindler's List",
+      "Year": 1993,
+      "Age Rating": "R",
+      "Duration": "195 mins",
+      "Category": "Biography/Drama",
+      "IMDb Rating": 8
+    },
+    {
+      "Name": "The Silence of the Lambs",
+      "Year": 1991,
+      "Age Rating": "R",
+      "Duration": "118 mins",
+      "Category": "Crime/Drama",
+      "IMDb Rating": 8
+    },
+    {
+      "Name": "The Green Mile",
+      "Year": 1999,
+      "Age Rating": "R",
+      "Duration": "189 mins",
+      "Category": "Crime/Drama",
+      "IMDb Rating": 8
+    },
+    {
+      "Name": "Fight Club",
+      "Year": 1999,
+      "Age Rating": "R",
+      "Duration": "139 mins",
+      "Category": "Drama",
+      "IMDb Rating": 8
+    },
+    {
+      "Name": "The Prestige",
+      "Year": 2006,
+      "Age Rating": "PG-13",
+      "Duration": "130 mins",
+      "Category": "Drama/Mystery",
+      "IMDb Rating": 8
+    },
+    {
+      "Name": "The Departed",
+      "Year": 2006,
+      "Age Rating": "R",
+      "Duration": "151 mins",
+      "Category": "Crime/Drama",
+      "IMDb Rating": 8
+    },
+    {
+      "Name": "No Country for Old Men",
+      "Year": 2007,
+      "Age Rating": "R",
+      "Duration": "122 mins",
+      "Category": "Crime/Drama",
+      "IMDb Rating": 8
+    },
+    {
+      "Name": "Slumdog Millionaire",
+      "Year": 2008,
+      "Age Rating": "R",
+      "Duration": "120 mins",
+      "Category": "Drama/Romance",
+      "IMDb Rating": 8
+    },
+    {
+      "Name": "The Social Network",
+      "Year": 2010,
+      "Age Rating": "PG-13",
+      "Duration": "120 mins",
+      "Category": "Biography/Drama",
+      "IMDb Rating": 7
+    },
+    {
+      "Name": "The Grand Budapest Hotel",
+      "Year": 2014,
+      "Age Rating": "R",
+      "Duration": "99 mins",
+      "Category": "Adventure/Comedy",
+      "IMDb Rating": 8
+    },
+    {
+      "Name": "Whiplash",
+      "Year": 2014,
+      "Age Rating": "R",
+      "Duration": "106 mins",
+      "Category": "Drama/Music",
+      "IMDb Rating": 8
+    },
+    {
+      "Name": "Birdman or (The Unexpected Virtue of Ignorance)",
+      "Year": 2014,
+      "Age Rating": "R",
+      "Duration": "119 mins",
+      "Category": "Comedy/Drama",
+      "IMDb Rating": 7
+    },
+    {
+      "Name": "Spotlight",
+      "Year": 2015,
+      "Age Rating": "R",
+      "Duration": "129 mins",
+      "Category": "Crime/Drama",
+      "IMDb Rating": 8
+    },
+    {
+      "Name": "Moonlight",
+      "Year": 2016,
+      "Age Rating": "R",
+      "Duration": "111 mins",
+      "Category": "Drama",
+      "IMDb Rating": 7
+    },
+    {
+      "Name": "Three Billboards Outside Ebbing",
+      "Year": "Missouri",
+      "Age Rating": 2017,
+      "Duration": "R",
+      "Category": "115 mins",
+      "IMDb Rating": "Crime/Drama"
+    },
+    {
+      "Name": "Roma",
+      "Year": 2018,
+      "Age Rating": "R",
+      "Duration": "135 mins",
+      "Category": "Drama",
+      "IMDb Rating": 7
+    },
+    {
+      "Name": "Once Upon a Time in Hollywood",
+      "Year": 2019,
+      "Age Rating": "R",
+      "Duration": "161 mins",
+      "Category": "Comedy/Drama",
+      "IMDb Rating": 7
+    },
+    {
+      "Name": 1917,
+      "Year": 2019,
+      "Age Rating": "R",
+      "Duration": "119 mins",
+      "Category": "Drama/War",
+      "IMDb Rating": 8
+    },
+    {
+      "Name": "Dunkirk",
+      "Year": 2017,
+      "Age Rating": "PG-13",
+      "Duration": "106 mins",
+      "Category": "Action/Drama",
+      "IMDb Rating": 7
+    },
+    {
+      "Name": "The Revenant",
+      "Year": 2015,
+      "Age Rating": "R",
+      "Duration": "156 mins",
+      "Category": "Action/Adventure",
+      "IMDb Rating": 8
+    },
+    {
+      "Name": "Arrival",
+      "Year": 2016,
+      "Age Rating": "PG-13",
+      "Duration": "116 mins",
+      "Category": "Drama/Sci-Fi",
+      "IMDb Rating": 7
+    },
+    {
+      "Name": "Her",
+      "Year": 2013,
+      "Age Rating": "R",
+      "Duration": "126 mins",
+      "Category": "Drama/Romance",
+      "IMDb Rating": 8
+    },
+    {
+      "Name": "Gone Girl",
+      "Year": 2014,
+      "Age Rating": "R",
+      "Duration": "149 mins",
+      "Category": "Drama/Mystery",
+      "IMDb Rating": 8
+    }
+  ]
