@@ -1,51 +1,29 @@
 import { Injectable } from '@angular/core';
-import { Observable, delay, merge, of } from 'rxjs';
+import { databases } from 'alasql';
+import { BehaviorSubject, Observable, delay, map, merge, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DatabaseManagerService {
 
-  private database: { [key: string]: string[] } = {
-    abcdef: [
-      'Afield',
-      'Bfield',
-      'Cfield',
-      'Dfield',
-    ],
-    bcdefg: [
-      'Afield',
-      'Bfield',
-      'Cfield',
-    ],
-    cdefgh: [
-      'Afield',
-      'Bfield',
-      'Cfield',
-      'Dfield',
-      'Efield',
-    ],
-    defghi: [
-      'Afield',
-      'Bfield',
-    ]
-  }
+  // private database:  = {};
+  private db: BehaviorSubject<{ [key: string]: string[] }> = new BehaviorSubject<{ [key: string]: string[] }>({});
 
   constructor() {
-    fetch('./assets/example.database.json').then(res => res.json())
-      .then(console.log);
+    fetch('./assets/example.database.json')
+      .then(result => result.json())
+      .then(result => {
+        this.db.next(result);
+      });
   }
 
   public getTablesList(): Observable<string[]> {
-    return merge(
-      of(Object.keys(this.database).splice(0, 2)),
-      of(Object.keys(this.database).splice(1, 3)).pipe(delay(3000)),
-      of(Object.keys(this.database).splice(2, 2)).pipe(delay(5000))
-    );
+    return this.db.pipe(map(database => Object.keys(database)));
   }
 
-  public getTableFields(tableName: string): string[] {
-    return this.database[tableName];
+  public getTableFields(tableName: string): Observable<string[]> {
+    return this.db.pipe(map(database => Object.keys(database[tableName])));
   }
 
 }

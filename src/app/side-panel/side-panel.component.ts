@@ -38,8 +38,8 @@ export class DynamicDataSource implements DataSource<DynamicFlatNode> {
           .filter(node => node.parent === null || !change.removed.find(p => p.label === node.parent))
           .flatMap(node => {
             if (change.added.find(p => p.label === node.label)) {
-              return [node].concat(this.database.getTableFields(node.label)
-                .map((fieldName: string) => (new DynamicFlatNode(fieldName, node.label))));
+              // return [node].concat(this.database.getTableFields(node.label)
+              //   .map((fieldName: string) => (new DynamicFlatNode(fieldName, node.label))));
             }
 
             return node;
