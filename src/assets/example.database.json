@@ -1,4 +1,5 @@
-[
+{
+  "movies": [
     {
       "Name": "Casablanca",
       "Year": 1942,
@@ -400,3 +401,4 @@
       "IMDb Rating": 8
     }
   ]
+}
