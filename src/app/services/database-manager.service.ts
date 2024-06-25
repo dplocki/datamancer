@@ -14,7 +14,7 @@ export class DatabaseManagerService {
       .then(result => result.json())
       .then(result => {
 
-        alasql('CREATE TABLE movies (`name` STRING, year int, `Age Rating` STRING, Duration STRING, CATEGORY STRING, `IMDb Rating` int)');
+        alasql('CREATE TABLE movies (Name STRING, Year int, `Age Rating` STRING, Duration STRING, Category STRING, `IMDb Rating` int)');
         alasql.tables['movies'].data = result.movies;
         console.log(alasql('SELECT * FROM movies'));
       });
