@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import alasql from 'alasql';
 import { BehaviorSubject, Observable, map } from 'rxjs';
 
 @Injectable({
@@ -12,7 +13,10 @@ export class DatabaseManagerService {
     fetch('./assets/example.database.json')
       .then(result => result.json())
       .then(result => {
-        this.db.next(result);
+
+        alasql('CREATE TABLE movies (`name` STRING, year int, `Age Rating` STRING, Duration STRING, CATEGORY STRING, `IMDb Rating` int)');
+        alasql.tables['movies'].data = result.movies;
+        console.log(alasql('SELECT * FROM movies'));
       });
   }
 
