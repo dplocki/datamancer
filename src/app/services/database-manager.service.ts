@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
-import { databases } from 'alasql';
-import { BehaviorSubject, Observable, delay, map, merge, of } from 'rxjs';
+import { BehaviorSubject, Observable, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DatabaseManagerService {
 
-  // private database:  = {};
   private db: BehaviorSubject<{ [key: string]: string[] }> = new BehaviorSubject<{ [key: string]: string[] }>({});
 
   constructor() {
