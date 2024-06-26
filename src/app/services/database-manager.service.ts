@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import alasql from 'alasql';
-import { BehaviorSubject, Observable, map } from 'rxjs';
+import { BehaviorSubject, Observable, map, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +13,17 @@ export class DatabaseManagerService {
     fetch('./assets/example.database.json')
       .then(result => result.json())
       .then(result => {
-
-        alasql('CREATE TABLE movies (Name STRING, Year int, `Age Rating` STRING, Duration STRING, Category STRING, `IMDb Rating` int)');
-        alasql.tables['movies'].data = result.movies;
-        console.log(alasql('SELECT * FROM movies'));
+        this.setTable(result.movies);
       });
+  }
+
+  public setTable(data: unknown[]) {
+    alasql('CREATE TABLE movies (Name STRING, Year int, `Age Rating` STRING, Duration STRING, Category STRING, `IMDb Rating` int)');
+    alasql.tables['movies'].data = data;
+
+    this.db.next({
+      movies: ['Name', 'Year', 'Age Rating', 'Duration', 'Category', 'IMDb Rating' ]
+    });
   }
 
   public getTablesList(): Observable<string[]> {
@@ -25,7 +31,7 @@ export class DatabaseManagerService {
   }
 
   public getTableFields(tableName: string): Observable<string[]> {
-    return this.db.pipe(map(database => Object.keys(database[tableName])));
+    return this.db.pipe(map(database => database[tableName]));
   }
 
 }
