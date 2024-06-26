@@ -34,18 +34,26 @@ export class DynamicDataSource implements DataSource<DynamicFlatNode> {
       .subscribe((change: SelectionChange<DynamicFlatNode>) => {
         let result = this.dataSubject.value;
 
-        result = result
-          .filter(node => node.parent === null || !change.removed.find(p => p.label === node.parent))
-          .flatMap(node => {
-            if (change.added.find(p => p.label === node.label)) {
-              // return [node].concat(this.database.getTableFields(node.label)
-              //   .map((fieldName: string) => (new DynamicFlatNode(fieldName, node.label))));
-            }
-
-            return node;
-          });
-
+        result = result.filter(node => node.parent === null || !change.removed.find(p => p.label === node.parent));
         this.dataSubject.next(result);
+
+        if (change.added.length > 0) {
+          change.added.forEach(extendedNode => {
+
+            this.database.getTableFields(extendedNode.label)
+              .subscribe(tableFields => {
+                const result = this.dataSubject.value;
+
+                result.splice(
+                  result.findIndex(p => p.label === extendedNode.label) + 1,
+                  0,
+                  ...tableFields.map((fieldName: string) => (new DynamicFlatNode(fieldName, extendedNode.label))),
+                )
+
+                this.dataSubject.next(result);
+              });
+          });
+        }
       });
   }
 
