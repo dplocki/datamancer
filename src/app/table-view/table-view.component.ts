@@ -60,16 +60,15 @@ export class TableViewComponent implements OnInit {
   public table!: string;
 
   displayedColumns!: string[];
-  dataSource!: DataSource<PeriodicElement>;
+  dataSource!: any[];
 
   constructor(private databaseManager: DatabaseManagerService) {
   }
 
   ngOnInit(): void {
     const data = this.databaseManager.getTableData(this.table);
-
     this.displayedColumns = Object.keys(data[0]);
-    this.dataSource = new ExampleDataSource(data);
+    this.dataSource = data;
   }
 
 }
