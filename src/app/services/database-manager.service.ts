@@ -34,4 +34,8 @@ export class DatabaseManagerService {
     return this.db.pipe(map(database => database[tableName]));
   }
 
+  public getTableData(tableName: string): any[] {
+    return alasql.tables[tableName].data;
+  }
+
 }

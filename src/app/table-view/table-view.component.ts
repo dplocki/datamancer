@@ -1,8 +1,9 @@
 import { DataSource } from '@angular/cdk/collections';
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Observable, ReplaySubject } from 'rxjs';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { DatabaseManagerService } from '../services/database-manager.service';
 
 export interface PeriodicElement {
   name: string;
@@ -53,8 +54,22 @@ class ExampleDataSource extends DataSource<PeriodicElement> {
   templateUrl: './table-view.component.html',
   styleUrl: './table-view.component.scss'
 })
-export class TableViewComponent {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataToDisplay = [...ELEMENT_DATA];
-  dataSource = new ExampleDataSource(this.dataToDisplay);
+export class TableViewComponent implements OnInit {
+
+  @Input()
+  public table!: string;
+
+  displayedColumns!: string[];
+  dataSource!: DataSource<PeriodicElement>;
+
+  constructor(private databaseManager: DatabaseManagerService) {
+  }
+
+  ngOnInit(): void {
+    const data = this.databaseManager.getTableData(this.table);
+
+    this.displayedColumns = Object.keys(data[0]);
+    this.dataSource = new ExampleDataSource(data);
+  }
+
 }
