@@ -10,20 +10,28 @@ export class DatabaseManagerService {
   private db: BehaviorSubject<{ [key: string]: string[] }> = new BehaviorSubject<{ [key: string]: string[] }>({});
 
   constructor() {
-    fetch('./assets/example.database.json')
+    fetch('./assets/movies.database.json')
       .then(result => result.json())
       .then(result => {
-        this.setTable(result.movies);
+        this.setTable(result.movies, 'movies');
+      });
+
+    fetch('./assets/users.tables.json')
+      .then(result => result.json())
+      .then(result => {
+        this.setTable(result, 'users');
       });
   }
 
-  public setTable(data: unknown[]) {
-    alasql('CREATE TABLE movies (Name STRING, Year int, `Age Rating` STRING, Duration STRING, Category STRING, `IMDb Rating` int)');
-    alasql.tables['movies'].data = data;
+  public setTable(data: unknown[], tableName: string): void {
+    alasql(`CREATE TABLE ${tableName}; SELECT * INTO ${tableName} FROM ?`, [data]);
 
-    this.db.next({
-      movies: ['Name', 'Year', 'Age Rating', 'Duration', 'Category', 'IMDb Rating' ]
-    });
+    const tableState = Object.keys(alasql.tables).reduce((result: { [key: string]: string[] }, tableName: string) => {
+      result[tableName] = Object.keys(alasql.tables[tableName].data[0]);
+      return result
+    }, {});
+
+    this.db.next(tableState);
   }
 
   public getTablesList(): Observable<string[]> {
