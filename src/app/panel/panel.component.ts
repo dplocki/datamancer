@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { TableViewComponent } from '../table-view/table-view.component';
 import { QueryComponent } from '../query/query.component';
 
@@ -13,6 +13,9 @@ import { QueryComponent } from '../query/query.component';
   styleUrl: './panel.component.scss'
 })
 export class PanelComponent {
+  @Input()
+  public table!: string;
+
   public inputText: string = '';
 
   public onInputChange(event: Event) {
