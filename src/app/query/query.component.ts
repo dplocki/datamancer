@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -16,5 +16,6 @@ import { MatInputModule } from '@angular/material/input';
   styleUrl: './query.component.scss'
 })
 export class QueryComponent {
-  public query:string = 'SELECT * FROM table';
+  @Input()
+  public query:string = '';
 }
