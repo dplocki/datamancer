@@ -46,4 +46,8 @@ export class DatabaseManagerService {
     return alasql.tables[tableName].data;
   }
 
+  public runQuery(sqlQuery: string): any[] {
+    return alasql(sqlQuery);
+  }
+
 }

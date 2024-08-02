@@ -1,6 +1,6 @@
 import { CollectionViewer, DataSource, SelectionChange } from '@angular/cdk/collections';
 import { FlatTreeControl } from '@angular/cdk/tree';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -79,6 +79,9 @@ export class DynamicDataSource implements DataSource<DynamicFlatNode> {
   styleUrl: './side-panel.component.scss'
 })
 export class SidePanelComponent {
+  @Output()
+  public userSelect = new EventEmitter<string>();
+
   treeControl: FlatTreeControl<DynamicFlatNode>;
   dataSource: DynamicDataSource;
 
@@ -88,4 +91,8 @@ export class SidePanelComponent {
   }
 
   hasChild = (_: number, node: DynamicFlatNode) => !node.parent;
+
+  public userSelectTable(tableName: string): void {
+    this.userSelect.emit('Table: ' + tableName);
+  }
 }

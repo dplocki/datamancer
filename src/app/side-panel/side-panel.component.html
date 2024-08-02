@@ -13,7 +13,7 @@
         {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
       </mat-icon>
     </button>
-    {{node.label}}
+    <a (click)="userSelectTable(node.label)">{{node.label}}</a>
     @if (node.isLoading) {
       <mat-progress-bar
           mode="indeterminate"
