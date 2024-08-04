@@ -1,8 +1,9 @@
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MetaData, NgEventBus } from 'ng-event-bus';
+import { IEventDataUserSelectTableOrColumn } from '../utils/events.interfaces';
 
 @Component({
   selector: 'app-query',
@@ -23,8 +24,9 @@ export class QueryComponent {
   constructor(
     private eventBus: NgEventBus) {
     this.eventBus.on('user:select:columnname').subscribe({
-      next: (data) => {
-        console.log('user:select:columnname', data);
+      next: (event: MetaData<unknown>): void => {
+        const data = event as MetaData<IEventDataUserSelectTableOrColumn>;
+        console.log('event:', data);
       }
     });
   }

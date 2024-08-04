@@ -8,6 +8,7 @@ import { MatTreeModule } from '@angular/material/tree';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { DatabaseManagerService } from '../services/database-manager.service';
 import { NgEventBus } from 'ng-event-bus';
+import { IEventDataUserSelectTableOrColumn } from '../utils/events.interfaces';
 
 class DynamicFlatNode {
   constructor(
@@ -99,14 +100,13 @@ export class SidePanelComponent {
   public userSelectTable(node: DynamicFlatNode): void {
     this.eventBus.cast('user:select:tablename', {
       table: node.label,
-      column: null,
-    });
+    } as IEventDataUserSelectTableOrColumn);
   }
 
   public userSelectTableColumn(node: DynamicFlatNode): void {
     this.eventBus.cast('user:select:columnname', {
       table: node.parent,
       column: node.label,
-    });
+    } as IEventDataUserSelectTableOrColumn);
   }
 }
