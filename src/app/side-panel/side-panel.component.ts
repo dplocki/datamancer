@@ -104,7 +104,7 @@ export class SidePanelComponent {
   }
 
   public userSelectTableColumn(node: DynamicFlatNode): void {
-    this.eventBus.cast('user:select:columnName', {
+    this.eventBus.cast('user:select:columnname', {
       table: node.parent,
       column: node.label,
     });

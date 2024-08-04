@@ -2,6 +2,7 @@ import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MetaData, NgEventBus } from 'ng-event-bus';
 
 @Component({
   selector: 'app-query',
@@ -17,5 +18,15 @@ import { MatInputModule } from '@angular/material/input';
 })
 export class QueryComponent {
   @Input()
-  public query:string = '';
+  public query: string = '';
+
+  constructor(
+    private eventBus: NgEventBus) {
+    this.eventBus.on('user:select:columnname').subscribe({
+      next: (data) => {
+        console.log('user:select:columnname', data);
+      }
+    });
+  }
+
 }
