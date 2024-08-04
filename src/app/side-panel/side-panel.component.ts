@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTreeModule } from '@angular/material/tree';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { DatabaseManagerService } from '../services/database-manager.service';
+import { NgEventBus } from 'ng-event-bus';
 
 class DynamicFlatNode {
   constructor(
@@ -85,14 +86,27 @@ export class SidePanelComponent {
   treeControl: FlatTreeControl<DynamicFlatNode>;
   dataSource: DynamicDataSource;
 
-  constructor(database: DatabaseManagerService) {
+  constructor(
+    database: DatabaseManagerService,
+    private eventBus: NgEventBus
+  ) {
     this.treeControl = new FlatTreeControl<DynamicFlatNode>(node => node.parent === null ? 0 : 1, node => !node.parent);
     this.dataSource = new DynamicDataSource(this.treeControl, database);
   }
 
   hasChild = (_: number, node: DynamicFlatNode) => !node.parent;
 
-  public userSelectTable(tableName: string): void {
-    this.userSelect.emit('Table: ' + tableName);
+  public userSelectTable(node: DynamicFlatNode): void {
+    this.eventBus.cast('user:select:tablename', {
+      table: node.label,
+      column: null,
+    });
+  }
+
+  public userSelectTableColumn(node: DynamicFlatNode): void {
+    this.eventBus.cast('user:select:columnName', {
+      table: node.parent,
+      column: node.label,
+    });
   }
 }
