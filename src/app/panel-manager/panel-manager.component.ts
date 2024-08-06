@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTabsModule } from '@angular/material/tabs';
 import { PanelComponent } from '../panel/panel.component';
+import { MetaData, NgEventBus } from 'ng-event-bus';
+import { IEventDataUserSelectTableOrColumn } from '../utils/events.interfaces';
 
 @Component({
   selector: 'app-panel-manager',
@@ -16,11 +18,19 @@ export class PanelManagerComponent implements OnInit {
 
   public tabs!: string[];
 
-  constructor() {
+  constructor(
+    private eventBus: NgEventBus) {
+
+    this.eventBus.on('user:select:tablename').subscribe({
+      next: (event: MetaData<unknown>): void => {
+        const eventData = (event as MetaData<IEventDataUserSelectTableOrColumn>).data;
+        this.tabs.push(eventData!.table);
+      },
+    });
   }
 
-  ngOnInit(): void {
-    this.tabs = [];
+  public ngOnInit(): void {
+    this.tabs = ['tab 1'];
   }
 
 }
