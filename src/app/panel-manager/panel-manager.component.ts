@@ -36,7 +36,7 @@ export class PanelManagerComponent implements OnInit {
   }
 
   public closeTab(index: number) {
-    console.log('Close tab', index);
+    this.tabs.splice(index, 1);
   }
 
 }
