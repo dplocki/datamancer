@@ -3,13 +3,15 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { PanelComponent } from '../panel/panel.component';
 import { MetaData, NgEventBus } from 'ng-event-bus';
 import { IEventDataUserSelectTableOrColumn } from '../utils/events.interfaces';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-panel-manager',
   standalone: true,
   imports: [
+    MatIconModule,
     MatTabsModule,
-    PanelComponent
+    PanelComponent,
   ],
   templateUrl: './panel-manager.component.html',
   styleUrl: './panel-manager.component.scss',

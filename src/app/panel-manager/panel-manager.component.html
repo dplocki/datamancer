@@ -3,7 +3,9 @@
     <mat-tab [label]="tab">
       <ng-template mat-tab-label>
         {{index}}
-        <button style="pointer-events: auto" (click)="closeTab(index);$event.stopPropagation()" mat-icon-button>Close</button>
+        <span (click)="closeTab(index);$event.stopPropagation();" mat-icon-button>
+          <mat-icon>close</mat-icon>
+        </span>
       </ng-template>
 
       <app-panel [table]="tab" />
