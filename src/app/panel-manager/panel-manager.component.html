@@ -1,6 +1,11 @@
 <mat-tab-group mat-stretch-tabs="false">
-  @for (tab of tabs; track tab) {
+  @for (tab of tabs; track tab; let index = $index) {
     <mat-tab [label]="tab">
+      <ng-template mat-tab-label>
+        {{index}}
+        <button style="pointer-events: auto" (click)="closeTab(index);$event.stopPropagation()" mat-icon-button>Close</button>
+      </ng-template>
+
       <app-panel [table]="tab" />
     </mat-tab>
   }
