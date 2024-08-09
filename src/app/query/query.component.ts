@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -19,7 +19,13 @@ export class QueryComponent {
   @Input()
   public query: string|undefined = '';
 
+  @Output()
+  public executeQuery = new EventEmitter<string>();
+
   constructor() {
   }
 
+  public runQuery(_event: MouseEvent) {
+    this.executeQuery.emit(this.query);
+  }
 }
