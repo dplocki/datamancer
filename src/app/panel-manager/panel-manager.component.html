@@ -6,7 +6,7 @@
         <mat-icon (click)="closeTab(index);$event.stopPropagation();">close</mat-icon>
       </ng-template>
 
-      <app-panel [table]="tab" />
+      <app-panel [query]="'SELECT * FROM ' + tab + ';'" />
     </mat-tab>
   }
 </mat-tab-group>

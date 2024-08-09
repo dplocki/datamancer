@@ -14,8 +14,6 @@ import { QueryComponent } from '../query/query.component';
 })
 export class PanelComponent {
   @Input()
-  public table!: string;
-
   public query!: string;
 
   public executeQuery(query: string): void {
