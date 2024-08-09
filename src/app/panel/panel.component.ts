@@ -16,17 +16,6 @@ export class PanelComponent {
   @Input()
   public table!: string;
 
-  public inputText: string = '';
-
-  public onInputChange(event: Event) {
-    const inputElement = event.target as HTMLTextAreaElement;
-    this.inputText = inputElement.value;
-  }
-
-  public onLoad(): void {
-console.log('onLoad', this.inputText);
-  }
-
   public executeQuery(query: string): void {
 console.log('executeQuery', query);
   }
