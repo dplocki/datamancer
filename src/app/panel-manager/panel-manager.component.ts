@@ -18,7 +18,7 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class PanelManagerComponent implements OnInit {
 
-  public tabs!: string[];
+  public tabStartingQueries!: string[];
 
   constructor(
     private eventBus: NgEventBus) {
@@ -26,17 +26,17 @@ export class PanelManagerComponent implements OnInit {
     this.eventBus.on('user:select:tablename').subscribe({
       next: (event: MetaData<unknown>): void => {
         const eventData = (event as MetaData<IEventDataUserSelectTableOrColumn>).data;
-        this.tabs.push(eventData!.table);
+        this.tabStartingQueries.push(`SELECT * FROM ${eventData!.table};`);
       },
     });
   }
 
   public ngOnInit(): void {
-    this.tabs = ['tab 1'];
+    this.tabStartingQueries = [''];
   }
 
   public closeTab(index: number) {
-    this.tabs.splice(index, 1);
+    this.tabStartingQueries.splice(index, 1);
   }
 
 }

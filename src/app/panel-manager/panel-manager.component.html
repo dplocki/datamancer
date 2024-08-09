@@ -1,12 +1,12 @@
 <mat-tab-group mat-stretch-tabs="false">
-  @for (tab of tabs; track tab; let index = $index) {
-    <mat-tab [label]="tab">
-      <ng-template mat-tab-label>
-        {{tab}}
-        <mat-icon (click)="closeTab(index);$event.stopPropagation();">close</mat-icon>
-      </ng-template>
+  @for (tabStartingQuery of tabStartingQueries; track tabStartingQuery; let index = $index) {
+  <mat-tab [label]="'tab ' + index">
+    <ng-template mat-tab-label>
+      {{'tab ' + index}}
+      <mat-icon (click)="closeTab(index);$event.stopPropagation();">close</mat-icon>
+    </ng-template>
 
-      <app-panel [query]="'SELECT * FROM ' + tab + ';'" />
-    </mat-tab>
+    <app-panel [query]="tabStartingQuery" />
+  </mat-tab>
   }
 </mat-tab-group>
