@@ -24,6 +24,10 @@ export class PanelComponent {
   }
 
   public onLoad(): void {
-    console.log(this.inputText);
+console.log('onLoad', this.inputText);
+  }
+
+  public executeQuery(query: string): void {
+console.log('executeQuery', query);
   }
 }
