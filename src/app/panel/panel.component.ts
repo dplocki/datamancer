@@ -16,7 +16,9 @@ export class PanelComponent {
   @Input()
   public table!: string;
 
+  public query!: string;
+
   public executeQuery(query: string): void {
-console.log('executeQuery', query);
+    this.query = query;
   }
 }

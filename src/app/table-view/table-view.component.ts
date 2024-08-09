@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { DatabaseManagerService } from '../services/database-manager.service';
@@ -20,10 +20,10 @@ export interface PeriodicElement {
   templateUrl: './table-view.component.html',
   styleUrl: './table-view.component.scss'
 })
-export class TableViewComponent implements OnInit {
+export class TableViewComponent implements OnChanges {
 
   @Input()
-  public table!: string;
+  public query!: string;
 
   displayedColumns!: string[];
   dataSource!: any[];
@@ -31,10 +31,11 @@ export class TableViewComponent implements OnInit {
   constructor(private databaseManager: DatabaseManagerService) {
   }
 
-  public ngOnInit(): void {
-    const data = this.databaseManager.getTableData(this.table);
-    this.displayedColumns = Object.keys(data[0]);
-    this.dataSource = data;
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes['query']) {
+      const data = this.databaseManager.runQuery(changes['query'].currentValue);
+      this.displayedColumns = Object.keys(data[0]);
+      this.dataSource = data;
+    }
   }
-
 }
