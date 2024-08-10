@@ -29,6 +29,12 @@ export class PanelManagerComponent implements OnInit {
         this.tabStartingQueries.push(`SELECT * FROM ${eventData!.table};`);
       },
     });
+
+    this.eventBus.on('user:create:newquerytab').subscribe({
+      next: (): void => {
+        this.tabStartingQueries.push('');
+      },
+    });
   }
 
   public ngOnInit(): void {
