@@ -1,3 +1,4 @@
+@if (!error) {
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
   @for (column of displayedColumns; track column) {
@@ -11,3 +12,7 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
 </table>
+}
+@else {
+  <p>{{ error }}</p>
+}

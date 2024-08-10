@@ -25,6 +25,8 @@ export class TableViewComponent implements OnChanges {
   @Input()
   public query!: string;
 
+  public error: string | null = null;
+
   displayedColumns!: string[];
   dataSource!: any[];
 
@@ -32,10 +34,18 @@ export class TableViewComponent implements OnChanges {
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
-    if (changes['query']) {
+    if (!changes['query']) {
+      return;
+    }
+
+    try {
       const data = this.databaseManager.runQuery(changes['query'].currentValue);
       this.displayedColumns = Object.keys(data[0]);
       this.dataSource = data;
+      this.error = null;
+    } catch (error) {
+      this.error = (error as Error).message;
+      console.log(error);
     }
   }
 }

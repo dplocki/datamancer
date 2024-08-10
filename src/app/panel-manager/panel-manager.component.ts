@@ -31,9 +31,7 @@ export class PanelManagerComponent implements OnInit {
     });
 
     this.eventBus.on('user:create:newquerytab').subscribe({
-      next: (): void => {
-        this.tabStartingQueries.push('');
-      },
+      next: (): void => { this.tabStartingQueries.push(''); },
     });
   }
 
