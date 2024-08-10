@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
+import { NgEventBus } from 'ng-event-bus';
 
 @Component({
   selector: 'app-header',
@@ -14,4 +15,11 @@ import { MatMenuModule } from '@angular/material/menu';
 })
 export class HeaderComponent {
 
+  constructor(
+    private eventBus: NgEventBus) {
+  }
+
+  public runNewQuery(): void {
+    this.eventBus.cast('user:create:newquerytab');
+  }
 }
