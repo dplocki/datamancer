@@ -28,7 +28,7 @@ export class DatabaseManagerService {
 
     const tableState = Object.keys(alasql.tables).reduce((result: { [key: string]: string[] }, tableName: string) => {
       result[tableName] = Object.keys(alasql.tables[tableName].data[0]);
-      return result
+      return result;
     }, {});
 
     this.db.next(tableState);
