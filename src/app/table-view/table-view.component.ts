@@ -39,8 +39,22 @@ export class TableViewComponent implements OnChanges {
     }
 
     try {
-      const data = this.databaseManager.runQuery(changes['query'].currentValue);
-      this.displayedColumns = Object.keys(data[0]);
+      const query = changes['query'].currentValue;
+      if (query === '') {
+        this.error = null;
+        this.dataSource = [];
+        this.displayedColumns = [];
+        return;
+      }
+
+      const data = this.databaseManager.runQuery(query);
+      if (!data) {
+        this.dataSource = [];
+        this.error = null;
+        return;
+      }
+
+      this.displayedColumns = data.length > 0 ? Object.keys(data[0]) : [];
       this.dataSource = data;
       this.error = null;
     } catch (error) {
