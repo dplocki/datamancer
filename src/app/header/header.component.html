@@ -1,9 +1,9 @@
 <header>
-  <button mat-button [matMenuTriggerFor]="menu">Import</button>
+  <button mat-button [matMenuTriggerFor]="import_menu">Import from</button>
   <button mat-button (click)="runNewQuery()">New query</button>
 </header>
 
-<mat-menu #menu="matMenu">
+<mat-menu #import_menu="matMenu">
   <button mat-menu-item>JSON</button>
   <button mat-menu-item>CSV</button>
 </mat-menu>
