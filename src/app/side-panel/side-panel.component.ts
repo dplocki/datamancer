@@ -95,7 +95,7 @@ export class SidePanelComponent {
     this.dataSource = new DynamicDataSource(this.treeControl, database);
   }
 
-  hasChild = (_: number, node: DynamicFlatNode) => !node.parent;
+  public hasChild = (_: number, node: DynamicFlatNode) => !node.parent;
 
   public userSelectTable(node: DynamicFlatNode): void {
     this.eventBus.cast('user:select:tablename', {

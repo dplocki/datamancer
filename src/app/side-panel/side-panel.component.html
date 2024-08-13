@@ -1,23 +1,20 @@
 <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
-  <mat-tree-node *matTreeNodeDef="let node"
-                  matTreeNodePadding>
-    <button mat-icon-button disabled></button>
-    <a (click)="userSelectTableColumn(node)">{{node.label}}</a>
-  </mat-tree-node>
-  <mat-tree-node *matTreeNodeDef="let node; when: hasChild"
-                  matTreeNodePadding>
-    <button mat-icon-button
-            [attr.aria-label]="'Toggle ' + node.label"
-            matTreeNodeToggle>
+  <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
+    <button mat-icon-button [attr.aria-label]="'Toggle ' + node.label" matTreeNodeToggle>
       <mat-icon class="mat-icon-rtl-mirror">
         {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
       </mat-icon>
     </button>
-    <a (click)="userSelectTable(node)">{{node.label}}</a>
+
+    <button mat-button (click)="userSelectTable(node)">{{node.label}}</button>
     @if (node.isLoading) {
-      <mat-progress-bar
-          mode="indeterminate"
-          class="example-tree-progress-bar"></mat-progress-bar>
+    <mat-progress-bar mode="indeterminate" class="example-tree-progress-bar"></mat-progress-bar>
     }
+  </mat-tree-node>
+  <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+    <button mat-icon-button (click)="userSelectTableColumn(node)">
+      <mat-icon>content_paste_go</mat-icon>
+    </button>
+    {{node.label}}
   </mat-tree-node>
 </mat-tree>
