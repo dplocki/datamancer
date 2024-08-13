@@ -18,7 +18,9 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class PanelManagerComponent implements OnInit {
 
-  public tabStartingQueries!: string[];
+  public tabs!: Tab[];
+
+  private tabNumber: number = 1;
 
   constructor(
     private eventBus: NgEventBus) {
@@ -28,21 +30,37 @@ export class PanelManagerComponent implements OnInit {
     });
 
     this.eventBus.on('user:create:newquerytab').subscribe({
-      next: (): void => { this.tabStartingQueries.push(''); },
+      next: (): void => { this.tabs.push(new Tab(this.buildTabName(), '')); },
     });
   }
 
   public ngOnInit(): void {
-    this.tabStartingQueries = [''];
+    this.tabs = [new Tab(this.buildTabName(), '')];
   }
 
   public closeTab(index: number) {
-    this.tabStartingQueries.splice(index, 1);
+    this.tabs.splice(index, 1);
   }
 
   private onUserSelectTableName(event: MetaData<IEventDataUserSelectTableOrColumn>): void {
     const eventData = event.data;
-    this.tabStartingQueries.push(`SELECT * FROM ${eventData!.table};`);
+    this.tabs.push(new Tab(this.buildTabName(), `SELECT * FROM ${eventData!.table};`));
   }
 
+  private buildTabName() {
+    return `tab ${this.tabNumber++}`;
+  }
+}
+
+class Tab {
+  public get tabName(): string {
+    return this._tabName;
+  }
+
+  public get startingQuery(): string {
+    return this._startingQuery;
+  }
+
+  constructor(private _tabName: string, private _startingQuery: string) {
+  }
 }

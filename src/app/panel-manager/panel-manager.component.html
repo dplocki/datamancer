@@ -1,12 +1,12 @@
 <mat-tab-group mat-stretch-tabs="false">
-  @for (tabStartingQuery of tabStartingQueries; track tabStartingQuery; let index = $index) {
-  <mat-tab [label]="'tab ' + index">
+  @for (tab of tabs; track tab; let index = $index) {
+  <mat-tab [label]="tab.tabName">
     <ng-template mat-tab-label>
-      {{'tab ' + index}}
+      {{ tab.tabName }}
       <mat-icon (click)="closeTab(index);$event.stopPropagation();">close</mat-icon>
     </ng-template>
 
-    <app-panel [query]="tabStartingQuery" />
+    <app-panel [query]="tab.startingQuery" />
   </mat-tab>
   }
 </mat-tab-group>
