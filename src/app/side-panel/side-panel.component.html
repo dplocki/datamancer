@@ -6,7 +6,11 @@
       </mat-icon>
     </button>
 
-    <button mat-button (click)="userSelectTable(node)">{{node.label}}</button>
+    <button mat-icon-button (click)="userSelectTable(node)">
+      <mat-icon>table</mat-icon>
+    </button>
+    {{node.label}}
+
     @if (node.isLoading) {
     <mat-progress-bar mode="indeterminate" class="example-tree-progress-bar"></mat-progress-bar>
     }
