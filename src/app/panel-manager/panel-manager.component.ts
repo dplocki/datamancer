@@ -4,6 +4,7 @@ import { PanelComponent } from '../panel/panel.component';
 import { MetaData, NgEventBus } from 'ng-event-bus';
 import { IEventDataUserSelectTableOrColumn } from '../utils/events.interfaces';
 import { MatIconModule } from '@angular/material/icon';
+import { Tab } from '../utils/tab';
 
 @Component({
   selector: 'app-panel-manager',
@@ -49,18 +50,5 @@ export class PanelManagerComponent implements OnInit {
 
   private buildTabName() {
     return `tab ${this.tabNumber++}`;
-  }
-}
-
-class Tab {
-  public get tabName(): string {
-    return this._tabName;
-  }
-
-  public get startingQuery(): string {
-    return this._startingQuery;
-  }
-
-  constructor(private _tabName: string, private _startingQuery: string) {
   }
 }
