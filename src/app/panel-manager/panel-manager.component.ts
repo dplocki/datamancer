@@ -44,7 +44,7 @@ export class PanelManagerComponent implements OnInit {
 
   private onUserSelectTableName(event: MetaData<IEventDataUserSelectTableOrColumn>): void {
     const eventData = event.data;
-    this.tabs.push(new Tab(this.buildTabName(), `SELECT * FROM ${eventData!.table};`));
+    this.tabs.push(new Tab(eventData!.table, `SELECT * FROM ${eventData!.table};`));
   }
 
   private buildTabName() {
