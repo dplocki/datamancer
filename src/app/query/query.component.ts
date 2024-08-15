@@ -20,9 +20,9 @@ import { EditorState, Extension } from '@codemirror/state';
   templateUrl: './query.component.html',
   styleUrl: './query.component.scss'
 })
-export class QueryComponent  implements AfterViewInit {
+export class QueryComponent implements AfterViewInit {
   @Input()
-  public query: string|undefined = '';
+  public query: string | undefined = '';
 
   @Output()
   public executeQuery = new EventEmitter<string>();
@@ -39,21 +39,23 @@ export class QueryComponent  implements AfterViewInit {
 
   ngAfterViewInit(): void {
     const editorElement = this.queryEditor.nativeElement;
-    let myExt: Extension = [basicSetup, sql()];
-    let state!: EditorState;
 
     try {
-      state = EditorState.create({
+      const state = EditorState.create({
         doc: this.query,
-        extensions: myExt,
+        extensions: [
+          basicSetup,
+          sql()
+        ],
       });
+
+      new EditorView({
+        state,
+        parent: editorElement,
+      });
+
     } catch (e) {
       console.error('query-component', e);
     }
-
-    new EditorView({
-      state,
-      parent: editorElement,
-    });
   }
 }
