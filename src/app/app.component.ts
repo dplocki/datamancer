@@ -12,7 +12,7 @@ import { PanelManagerComponent } from './panel-manager/panel-manager.component';
     <main>
       <app-panel-manager />
       <aside>
-        <app-side-panel (userSelect)="onSidePanelUserSelect($event)" />
+        <app-side-panel />
       </aside>
     </main>
     <app-footer />
@@ -27,9 +27,4 @@ import { PanelManagerComponent } from './panel-manager/panel-manager.component';
 })
 export class AppComponent {
   title = 'Datamancer';
-
-  public onSidePanelUserSelect($event: string) {
-    alert($event);
-  }
-
 }

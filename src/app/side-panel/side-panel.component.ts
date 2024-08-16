@@ -1,19 +1,15 @@
 import { Component } from '@angular/core';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { MatTreeModule } from '@angular/material/tree';
-import { TableViewComponent } from "../table-view/table-view.component";
+import { TablesTreeComponent } from '../tables-tree/tables-tree.component';
 
 @Component({
-  selector: 'app-tables-tree',
+  selector: 'app-side-panel',
   standalone: true,
   imports: [
-    MatTreeModule,
     MatButtonModule,
-    MatIconModule,
     MatProgressBarModule,
-    TableViewComponent
+    TablesTreeComponent,
 ],
   templateUrl: './side-panel.component.html',
   styleUrl: './side-panel.component.scss'
