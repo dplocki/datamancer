@@ -6,7 +6,7 @@
       <mat-icon (click)="closeTab(index);$event.stopPropagation();">close</mat-icon>
     </ng-template>
 
-    <app-panel [query]="tab.startingQuery" />
+    <app-query-panel [query]="tab.startingQuery" />
   </mat-tab>
   }
 </mat-tab-group>

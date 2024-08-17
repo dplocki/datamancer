@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTabsModule } from '@angular/material/tabs';
-import { PanelComponent } from '../panel/panel.component';
 import { MetaData, NgEventBus } from 'ng-event-bus';
 import { IEventDataUserSelectTableOrColumn } from '../utils/events.interfaces';
 import { MatIconModule } from '@angular/material/icon';
 import { Tab } from '../utils/tab';
+import { QueryPanelComponent } from '../panel/query-panel.component';
 
 @Component({
   selector: 'app-panel-manager',
@@ -12,7 +12,7 @@ import { Tab } from '../utils/tab';
   imports: [
     MatIconModule,
     MatTabsModule,
-    PanelComponent,
+    QueryPanelComponent
   ],
   templateUrl: './panel-manager.component.html',
   styleUrl: './panel-manager.component.scss',

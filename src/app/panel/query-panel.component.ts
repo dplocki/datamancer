@@ -3,16 +3,16 @@ import { TableViewComponent } from '../table-view/table-view.component';
 import { QueryComponent } from '../query/query.component';
 
 @Component({
-  selector: 'app-panel',
+  selector: 'app-query-panel',
   standalone: true,
   imports: [
     QueryComponent,
     TableViewComponent,
   ],
-  templateUrl: './panel.component.html',
-  styleUrl: './panel.component.scss'
+  templateUrl: './query-panel.component.html',
+  styleUrl: './query-panel.component.scss'
 })
-export class PanelComponent {
+export class QueryPanelComponent {
   @Input()
   public query!: string;
 
