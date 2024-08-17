@@ -1,13 +1,23 @@
-export class Tab {
+export abstract class Tab {
 
   public get tabName(): string {
     return this._tabName;
   }
 
-  public get startingQuery(): string {
+  abstract get initializeParamater(): string;
+
+  constructor(private _tabName: string) {
+  }
+}
+
+export class QueryTab extends Tab {
+
+  public override get initializeParamater(): string {
     return this._startingQuery;
   }
 
-  constructor(private _tabName: string, private _startingQuery: string) {
+  constructor(_tabName: string, private _startingQuery: string) {
+    super(_tabName);
   }
+
 }

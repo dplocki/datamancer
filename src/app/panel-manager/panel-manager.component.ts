@@ -3,7 +3,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MetaData, NgEventBus } from 'ng-event-bus';
 import { IEventDataUserSelectTableOrColumn } from '../utils/events.interfaces';
 import { MatIconModule } from '@angular/material/icon';
-import { Tab } from '../utils/tab';
+import { QueryTab, Tab } from '../utils/tab';
 import { QueryPanelComponent } from '../panel/query-panel.component';
 
 @Component({
@@ -31,12 +31,12 @@ export class PanelManagerComponent implements OnInit {
     });
 
     this.eventBus.on('user:create:newquerytab').subscribe({
-      next: (): void => { this.tabs.push(new Tab(this.buildTabName(), '')); },
+      next: (): void => { this.tabs.push(new QueryTab(this.buildTabName(), '')); },
     });
   }
 
   public ngOnInit(): void {
-    this.tabs = [new Tab(this.buildTabName(), '')];
+    this.tabs = [new QueryTab(this.buildTabName(), '')];
   }
 
   public closeTab(index: number) {
@@ -45,7 +45,7 @@ export class PanelManagerComponent implements OnInit {
 
   private onUserSelectTableName(event: MetaData<IEventDataUserSelectTableOrColumn>): void {
     const eventData = event.data;
-    this.tabs.push(new Tab(eventData!.table, `SELECT * FROM ${eventData!.table};`));
+    this.tabs.push(new QueryTab(eventData!.table, `SELECT * FROM ${eventData!.table};`));
   }
 
   private buildTabName() {
