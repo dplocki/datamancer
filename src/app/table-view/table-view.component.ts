@@ -1,6 +1,6 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { MatTableModule } from '@angular/material/table';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { AfterViewInit, Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { DatabaseManagerService } from '../services/database-manager.service';
 
 export interface PeriodicElement {
@@ -20,7 +20,7 @@ export interface PeriodicElement {
   templateUrl: './table-view.component.html',
   styleUrl: './table-view.component.scss'
 })
-export class TableViewComponent implements OnChanges {
+export class TableViewComponent implements OnChanges, AfterViewInit {
 
   @Input()
   public query!: string;
@@ -28,9 +28,15 @@ export class TableViewComponent implements OnChanges {
   public error: string | null = null;
 
   displayedColumns!: string[];
-  dataSource!: any[];
+  dataSource: MatTableDataSource<any> = new MatTableDataSource<any>([]);
+
+  @ViewChild(MatPaginator) paginator: MatPaginator = <MatPaginator>{};
 
   constructor(private databaseManager: DatabaseManagerService) {
+  }
+
+  public ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
@@ -42,24 +48,28 @@ export class TableViewComponent implements OnChanges {
       const query = changes['query'].currentValue;
       if (query === '') {
         this.error = null;
-        this.dataSource = [];
+        this.dataSource.data = [];
         this.displayedColumns = [];
         return;
       }
 
       const data = this.databaseManager.runQuery(query);
       if (!data) {
-        this.dataSource = [];
+        this.dataSource.data = [];
         this.error = null;
         return;
       }
 
       this.displayedColumns = data.length > 0 ? Object.keys(data[0]) : [];
-      this.dataSource = data;
+      this.dataSource.data = data;
       this.error = null;
     } catch (error) {
       this.error = (error as Error).message;
       console.log(error);
+    }
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator = this.paginator;
     }
   }
 }
