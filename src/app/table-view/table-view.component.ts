@@ -2,6 +2,7 @@ import { AfterViewInit, Component, Input, OnChanges, OnInit, SimpleChanges, View
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { DatabaseManagerService } from '../services/database-manager.service';
+import { MatSort, MatSortModule } from '@angular/material/sort';
 
 export interface PeriodicElement {
   name: string;
@@ -15,6 +16,7 @@ export interface PeriodicElement {
   standalone: true,
   imports: [
     MatPaginatorModule,
+    MatSortModule,
     MatTableModule,
   ],
   templateUrl: './table-view.component.html',
@@ -31,12 +33,14 @@ export class TableViewComponent implements OnChanges, AfterViewInit {
   dataSource: MatTableDataSource<any> = new MatTableDataSource<any>([]);
 
   @ViewChild(MatPaginator) paginator: MatPaginator = <MatPaginator>{};
+  @ViewChild(MatSort) sort: MatSort = <MatSort>{};
 
   constructor(private databaseManager: DatabaseManagerService) {
   }
 
   public ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
