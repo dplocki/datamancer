@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { DatabaseManagerService } from '../services/database-manager.service';
@@ -29,8 +29,8 @@ export class TableViewComponent implements OnChanges, AfterViewInit {
 
   public error: string | null = null;
 
-  displayedColumns!: string[];
-  dataSource: MatTableDataSource<any> = new MatTableDataSource<any>([]);
+  public displayedColumns!: string[];
+  public dataSource: MatTableDataSource<any> = new MatTableDataSource<any>([]);
 
   @ViewChild(MatPaginator) paginator: MatPaginator = <MatPaginator>{};
   @ViewChild(MatSort) sort: MatSort = <MatSort>{};
@@ -38,7 +38,11 @@ export class TableViewComponent implements OnChanges, AfterViewInit {
   constructor(private databaseManager: DatabaseManagerService) {
   }
 
-  public ngAfterViewInit() {
+  public isTableEmpty(): boolean {
+    return this.dataSource.data.length === 0;
+  }
+
+  public ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
