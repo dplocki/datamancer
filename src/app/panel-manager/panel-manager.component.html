@@ -1,12 +1,28 @@
 <mat-tab-group mat-stretch-tabs="false">
   @for (tab of tabs; track tab; let index = $index) {
-  <mat-tab [label]="tab.tabName">
-    <ng-template mat-tab-label>
-      {{ tab.tabName }}
-      <mat-icon (click)="closeTab(index);$event.stopPropagation();">close</mat-icon>
-    </ng-template>
+    @switch (tab.tabType) {
+      @case ('QUERY') {
+        <mat-tab [label]="tab.tabName">
+          <ng-template mat-tab-label>
+            {{ tab.tabName }}
+            <mat-icon (click)="closeTab(index);$event.stopPropagation();">close</mat-icon>
+          </ng-template>
 
-    <app-query-panel [query]="tab.initializeParamater" />
-  </mat-tab>
+          <app-query-panel [query]="tab.initializeParamater" />
+        </mat-tab>
+      }
+
+      @case ('IMPORT') {
+        <mat-tab [label]="tab.tabName">
+          <ng-template mat-tab-label>
+            {{ tab.tabName }}
+            <mat-icon (click)="closeTab(index);$event.stopPropagation();">close</mat-icon>
+          </ng-template>
+
+          IMPORT
+
+        </mat-tab>
+      }
+    }
   }
 </mat-tab-group>
