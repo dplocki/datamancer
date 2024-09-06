@@ -5,14 +5,16 @@ import { IEventDataUserSelectTableOrColumn } from '../utils/events.interfaces';
 import { MatIconModule } from '@angular/material/icon';
 import { ImportTab, QueryTab, Tab } from '../utils/tab';
 import { QueryPanelComponent } from '../query-panel/query-panel.component';
+import { ImportPanelComponent } from '../import-panel/import-panel.component';
 
 @Component({
   selector: 'app-panel-manager',
   standalone: true,
   imports: [
+    ImportPanelComponent,
     MatIconModule,
     MatTabsModule,
-    QueryPanelComponent
+    QueryPanelComponent,
   ],
   templateUrl: './panel-manager.component.html',
   styleUrl: './panel-manager.component.scss',
