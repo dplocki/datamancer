@@ -4,5 +4,6 @@
   <mat-button-toggle value="SQL">SQL</mat-button-toggle>
 </mat-button-toggle-group>
 
-<textarea>
-</textarea>
+<button mat-button (click)="parseData()">Parse data</button>
+
+<textarea [(ngModel)]="rawText"></textarea>
