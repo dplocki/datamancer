@@ -4,7 +4,7 @@ import { MetaData, NgEventBus } from 'ng-event-bus';
 import { IEventDataUserSelectTableOrColumn } from '../utils/events.interfaces';
 import { MatIconModule } from '@angular/material/icon';
 import { ImportTab, QueryTab, Tab } from '../utils/tab';
-import { QueryPanelComponent } from '../panel/query-panel.component';
+import { QueryPanelComponent } from '../query-panel/query-panel.component';
 
 @Component({
   selector: 'app-panel-manager',
