@@ -1,7 +1,7 @@
 @if (isTableEmpty()) {
 <div>No data</div>
 }
-@else if (!error) {
+
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
 
   @for (column of displayedColumns; track column) {
@@ -17,7 +17,3 @@
 </table>
 
 <mat-paginator pageSize="25" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-}
-@else {
-<p>{{ error }}</p>
-}
