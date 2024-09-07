@@ -5,7 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { sql } from '@codemirror/lang-sql';
 import { basicSetup, EditorView } from 'codemirror';
-import { EditorState, Extension } from '@codemirror/state';
+import { EditorState } from '@codemirror/state';
 
 @Component({
   selector: 'app-query',
@@ -30,32 +30,25 @@ export class QueryComponent implements AfterViewInit {
   @ViewChild('queryEditor')
   public queryEditor: any;
 
-  constructor() {
-  }
+  private editor!: EditorView;
 
   public runQuery(_event: MouseEvent) {
-    this.executeQuery.emit(this.query);
+    this.executeQuery.emit(this.editor.state.doc.toString());
   }
 
-  ngAfterViewInit(): void {
+  public ngAfterViewInit(): void {
     const editorElement = this.queryEditor.nativeElement;
+    const state = EditorState.create({
+      doc: this.query,
+      extensions: [
+        basicSetup,
+        sql()
+      ],
+    });
 
-    try {
-      const state = EditorState.create({
-        doc: this.query,
-        extensions: [
-          basicSetup,
-          sql()
-        ],
-      });
-
-      new EditorView({
-        state,
-        parent: editorElement,
-      });
-
-    } catch (e) {
-      console.error('query-component', e);
-    }
+    this.editor = new EditorView({
+      state,
+      parent: editorElement,
+    });
   }
 }
