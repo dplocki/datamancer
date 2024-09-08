@@ -17,6 +17,7 @@ export class QueryPanelComponent implements OnInit {
   @Input()
   public query: string = '';
   public data: any[] = [];
+  public queryError: string | null = null;
 
   constructor(
     private databaseManager: DatabaseManagerService) {
@@ -32,6 +33,12 @@ export class QueryPanelComponent implements OnInit {
 
   public executeQuery(query: string): void {
     this.query = query;
-    this.data = this.databaseManager.runQuery(query);
+    this.queryError = null;
+
+    try {
+      this.data = this.databaseManager.runQuery(query);
+    } catch(error) {
+      this.queryError = (error as Error).message;;
+    }
   }
 }
