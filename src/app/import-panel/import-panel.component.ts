@@ -35,7 +35,7 @@ export class ImportPanelComponent {
 
     try {
 
-      this.data = this.state.parse(this.rawText);
+      this.data = this.state.textToData(this.rawText);
       this.state = new ImportPanelComponentStateDisplayData();
       this.stateLabel = 'TAB';
 
@@ -52,43 +52,58 @@ export class ImportPanelComponent {
       case 'CSV':
         this.state = new ImportPanelComponentStateParseCSV();
         break;
-      case 'SQL':
-        this.state = new ImportPanelComponentStateParseSQL();
-        break;
     }
+
+    if (this.data) {
+      this.state.dataToText(this.data);
+    }
+
   }
 }
 
 interface IImportPanelComponentState {
   get allowParse(): boolean;
 
-  parse(text: string): any[];
+  textToData(text: string): any[];
+
+  dataToText(data: any[]): string;
 }
 
 class ImportPanelComponentStateBeforeParse {
   public get allowParse(): boolean {
     return true;
   }
-
 }
 
 class ImportPanelComponentStateParseJSON extends ImportPanelComponentStateBeforeParse implements IImportPanelComponentState {
 
-  public parse(text: string): any[] {
+  public textToData(text: string): any[] {
     return JSON.parse(text);
+  }
+
+  public dataToText(data: any[]): string {
+    return JSON.stringify(data);
   }
 }
 
 class ImportPanelComponentStateParseCSV extends ImportPanelComponentStateBeforeParse implements IImportPanelComponentState {
 
-  public parse(text: string): any[] {
+  public textToData(text: string): any[] {
+    throw new Error('not implemented');
+  }
+
+  public dataToText(data: any[]): string {
     throw new Error('not implemented');
   }
 }
 
 class ImportPanelComponentStateParseSQL extends ImportPanelComponentStateBeforeParse implements IImportPanelComponentState {
 
-  public parse(text: string): any[] {
+  public textToData(text: string): any[] {
+    throw new Error('not implemented');
+  }
+
+  public dataToText(data: any[]): string {
     throw new Error('not implemented');
   }
 }
@@ -99,7 +114,11 @@ class ImportPanelComponentStateDisplayData implements IImportPanelComponentState
     return false
   }
 
-  parse(_text: string): any[] {
+  public textToData(_text: string): any[] {
+    throw new Error('Method cannot be called.');
+  }
+
+  public dataToText(_data: any[]): string {
     throw new Error('Method cannot be called.');
   }
 }
