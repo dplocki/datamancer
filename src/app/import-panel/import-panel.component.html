@@ -1,9 +1,17 @@
-<mat-button-toggle-group [(ngModel)]="fontStyle">
+<mat-button-toggle-group [(ngModel)]="stateLabel" (change)="onValChange($event.value)">
   <mat-button-toggle value="JSON">JSON</mat-button-toggle>
   <mat-button-toggle value="CSV">CSV</mat-button-toggle>
-  <mat-button-toggle value="SQL">SQL</mat-button-toggle>
+  <mat-button-toggle value="TAB" [disabled]="!isBeforeParsing">TAB</mat-button-toggle>
 </mat-button-toggle-group>
 
-<button mat-button (click)="parseData()">Parse data</button>
+<button mat-button (click)="parseData()" [disabled]="isBeforeParsing">Parse data</button>
 
-<textarea [(ngModel)]="rawText"></textarea>
+@if (isBeforeParsing) {
+  <app-table-view [data]="data" ></app-table-view>
+} @else {
+  @if (parsingError) {
+    <pre>{{parsingError}}</pre>
+  }
+
+  <textarea [(ngModel)]="rawText"></textarea>
+}
