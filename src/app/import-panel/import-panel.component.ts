@@ -55,9 +55,8 @@ export class ImportPanelComponent {
     }
 
     if (this.data) {
-      this.state.dataToText(this.data);
+      this.rawText = this.state.dataToText(this.data);
     }
-
   }
 }
 
@@ -87,17 +86,6 @@ class ImportPanelComponentStateParseJSON extends ImportPanelComponentStateBefore
 }
 
 class ImportPanelComponentStateParseCSV extends ImportPanelComponentStateBeforeParse implements IImportPanelComponentState {
-
-  public textToData(text: string): any[] {
-    throw new Error('not implemented');
-  }
-
-  public dataToText(data: any[]): string {
-    throw new Error('not implemented');
-  }
-}
-
-class ImportPanelComponentStateParseSQL extends ImportPanelComponentStateBeforeParse implements IImportPanelComponentState {
 
   public textToData(text: string): any[] {
     throw new Error('not implemented');
