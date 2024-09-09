@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatButtonModule } from '@angular/material/button';
 import { TableViewComponent } from '../table-view/table-view.component';
+import { stringify } from 'csv-stringify/browser/esm/sync';
 
 @Component({
   selector: 'app-import-panel',
@@ -92,7 +93,9 @@ class ImportPanelComponentStateParseCSV extends ImportPanelComponentStateBeforeP
   }
 
   public dataToText(data: any[]): string {
-    throw new Error('not implemented');
+    const csvArray = [(Object.keys(data[0]) as any[]), ...data.map(Object.values)];
+
+    return stringify(csvArray);
   }
 }
 
