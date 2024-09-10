@@ -4,6 +4,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatButtonModule } from '@angular/material/button';
 import { TableViewComponent } from '../table-view/table-view.component';
 import { stringify } from 'csv-stringify/browser/esm/sync';
+import { parse } from 'csv-parse/browser/esm/sync';
 
 @Component({
   selector: 'app-import-panel',
@@ -89,7 +90,15 @@ class ImportPanelComponentStateParseJSON extends ImportPanelComponentStateBefore
 class ImportPanelComponentStateParseCSV extends ImportPanelComponentStateBeforeParse implements IImportPanelComponentState {
 
   public textToData(text: string): any[] {
-    throw new Error('not implemented');
+    const data: any[] = parse(text);
+    const columns: string[] = data.shift();
+
+    return data.map(datum => {
+      return columns.reduce((result: Record<string, any>, currentColumn: any, index: number) => {
+        result[currentColumn] = datum[index];
+        return result;
+      }, {});
+    });
   }
 
   public dataToText(data: any[]): string {
