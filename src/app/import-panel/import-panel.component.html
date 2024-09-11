@@ -1,4 +1,4 @@
-<mat-button-toggle-group [(ngModel)]="stateLabel" (change)="onValChange($event.value)">
+<mat-button-toggle-group [(ngModel)]="stateLabel" (change)="onDataFormatChange($event.value)">
   <mat-button-toggle value="JSON">JSON</mat-button-toggle>
   <mat-button-toggle value="CSV">CSV</mat-button-toggle>
   <mat-button-toggle value="TAB" [disabled]="!isBeforeParsing">TAB</mat-button-toggle>

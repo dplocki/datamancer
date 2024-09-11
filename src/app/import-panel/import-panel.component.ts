@@ -46,7 +46,9 @@ export class ImportPanelComponent {
     }
   }
 
-  public onValChange(value: any) {
+  public onDataFormatChange(value: any) {
+    this.parsingError = null;
+
     switch (value) {
       case 'JSON':
         this.state = new ImportPanelComponentStateParseJSON();
