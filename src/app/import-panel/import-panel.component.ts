@@ -41,6 +41,7 @@ export class ImportPanelComponent {
       this.stateLabel = 'TAB';
     } catch (error) {
       this.parsingError = (error as Error).message;
+      this.data = null;
     }
   }
 
@@ -65,7 +66,7 @@ export class ImportPanelComponent {
 interface IImportPanelComponentState {
   get allowParse(): boolean;
 
-  textToData(text: string): any[];
+  textToData(text: string): any[] | null;
 
   dataToText(data: any[]): string;
 }
@@ -78,7 +79,7 @@ class ImportPanelComponentStateBeforeParse {
 
 class ImportPanelComponentStateParseJSON extends ImportPanelComponentStateBeforeParse implements IImportPanelComponentState {
 
-  public textToData(text: string): any[] {
+  public textToData(text: string): any[] | null {
     return JSON.parse(text);
   }
 
@@ -89,8 +90,12 @@ class ImportPanelComponentStateParseJSON extends ImportPanelComponentStateBefore
 
 class ImportPanelComponentStateParseCSV extends ImportPanelComponentStateBeforeParse implements IImportPanelComponentState {
 
-  public textToData(text: string): any[] {
+  public textToData(text: string): any[] | null {
     const data: any[] = parse(text);
+    if (!Array.isArray(data) || (data.length === 0)) {
+      return null;
+    }
+
     const columns: string[] = data.shift();
 
     return data.map(datum => {
@@ -116,7 +121,7 @@ class ImportPanelComponentStateDisplayData implements IImportPanelComponentState
     return false
   }
 
-  public textToData(_text: string): any[] {
+  public textToData(_text: string): any[] | null {
     throw new Error('Method cannot be called.');
   }
 
