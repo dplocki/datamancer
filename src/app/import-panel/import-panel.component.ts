@@ -36,11 +36,9 @@ export class ImportPanelComponent {
     this.data = null;
 
     try {
-
       this.data = this.state.textToData(this.rawText);
       this.state = new ImportPanelComponentStateDisplayData();
       this.stateLabel = 'TAB';
-
     } catch (error) {
       this.parsingError = (error as Error).message;
     }
@@ -85,7 +83,7 @@ class ImportPanelComponentStateParseJSON extends ImportPanelComponentStateBefore
   }
 
   public dataToText(data: any[]): string {
-    return JSON.stringify(data);
+    return JSON.stringify(data, null, 4);
   }
 }
 
@@ -97,7 +95,9 @@ class ImportPanelComponentStateParseCSV extends ImportPanelComponentStateBeforeP
 
     return data.map(datum => {
       return columns.reduce((result: Record<string, any>, currentColumn: any, index: number) => {
-        result[currentColumn] = datum[index];
+        const rawData = datum[index];
+
+        result[currentColumn] = isNaN(rawData) ? rawData : +rawData;
         return result;
       }, {});
     });
