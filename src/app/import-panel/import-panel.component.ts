@@ -66,7 +66,7 @@ export class ImportPanelComponent {
 interface IImportPanelComponentState {
   get allowParse(): boolean;
 
-  textToData(text: string): any[] | null;
+  textToData(text: string): any[];
 
   dataToText(data: any[]): string;
 }
@@ -79,7 +79,7 @@ class ImportPanelComponentStateBeforeParse {
 
 class ImportPanelComponentStateParseJSON extends ImportPanelComponentStateBeforeParse implements IImportPanelComponentState {
 
-  public textToData(text: string): any[] | null {
+  public textToData(text: string): any[] {
     return JSON.parse(text);
   }
 
@@ -90,10 +90,10 @@ class ImportPanelComponentStateParseJSON extends ImportPanelComponentStateBefore
 
 class ImportPanelComponentStateParseCSV extends ImportPanelComponentStateBeforeParse implements IImportPanelComponentState {
 
-  public textToData(text: string): any[] | null {
+  public textToData(text: string): any[] {
     const data: any[] = parse(text);
     if (!Array.isArray(data) || (data.length === 0)) {
-      return null;
+      return data;
     }
 
     const columns: string[] = data.shift();
@@ -109,7 +109,14 @@ class ImportPanelComponentStateParseCSV extends ImportPanelComponentStateBeforeP
   }
 
   public dataToText(data: any[]): string {
-    const csvArray = [(Object.keys(data[0]) as any[]), ...data.map(Object.values)];
+    if (data.length === 0) {
+      return '';
+    }
+
+    const csvArray = [
+      (Object.keys(data[0]) as any[]),
+      ...data.map(Object.values)
+    ];
 
     return stringify(csvArray);
   }
@@ -121,7 +128,7 @@ class ImportPanelComponentStateDisplayData implements IImportPanelComponentState
     return false
   }
 
-  public textToData(_text: string): any[] | null {
+  public textToData(_text: string): any[] {
     throw new Error('Method cannot be called.');
   }
 
