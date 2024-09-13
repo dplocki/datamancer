@@ -6,18 +6,12 @@ import { NgEventBus } from 'ng-event-bus';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [
-    MatButtonModule,
-    MatMenuModule
-  ],
+  imports: [MatButtonModule, MatMenuModule],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.scss'
+  styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
-
-  constructor(
-    private eventBus: NgEventBus) {
-  }
+  constructor(private eventBus: NgEventBus) {}
 
   public runNewQuery(): void {
     this.eventBus.cast('user:create:newquerytab');

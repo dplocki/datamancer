@@ -1,5 +1,4 @@
 export abstract class Tab {
-
   public get tabName(): string {
     return this._tabName;
   }
@@ -8,12 +7,10 @@ export abstract class Tab {
 
   abstract get tabType(): string;
 
-  constructor(private _tabName: string) {
-  }
+  constructor(private _tabName: string) {}
 }
 
 export class QueryTab extends Tab {
-
   public override get initializeParamater(): string {
     return this._startingQuery;
   }
@@ -22,14 +19,15 @@ export class QueryTab extends Tab {
     return 'QUERY';
   }
 
-  constructor(_tabName: string, private _startingQuery: string) {
+  constructor(
+    _tabName: string,
+    private _startingQuery: string,
+  ) {
     super(_tabName);
   }
-
 }
 
 export class ImportTab extends Tab {
-
   public override get tabType(): string {
     return 'IMPORT';
   }
@@ -37,5 +35,4 @@ export class ImportTab extends Tab {
   public override get initializeParamater(): string {
     return '';
   }
-
 }

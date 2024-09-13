@@ -1,4 +1,11 @@
-import { AfterViewInit, Component, Input, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  Input,
+  OnChanges,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
@@ -13,16 +20,11 @@ export interface PeriodicElement {
 @Component({
   selector: 'app-table-view',
   standalone: true,
-  imports: [
-    MatPaginatorModule,
-    MatSortModule,
-    MatTableModule,
-  ],
+  imports: [MatPaginatorModule, MatSortModule, MatTableModule],
   templateUrl: './table-view.component.html',
-  styleUrl: './table-view.component.scss'
+  styleUrl: './table-view.component.scss',
 })
 export class TableViewComponent implements OnChanges, AfterViewInit {
-
   @Input()
   public data: any[] | null = null;
 
@@ -32,8 +34,7 @@ export class TableViewComponent implements OnChanges, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator = {} as MatPaginator;
   @ViewChild(MatSort) sort: MatSort = {} as MatSort;
 
-  constructor() {
-  }
+  constructor() {}
 
   public isTableEmpty(): boolean {
     return this.dataSource.data.length === 0;

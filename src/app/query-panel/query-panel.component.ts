@@ -6,12 +6,9 @@ import { DatabaseManagerService } from '../services/database-manager.service';
 @Component({
   selector: 'app-query-panel',
   standalone: true,
-  imports: [
-    QueryComponent,
-    TableViewComponent,
-  ],
+  imports: [QueryComponent, TableViewComponent],
   templateUrl: './query-panel.component.html',
-  styleUrl: './query-panel.component.scss'
+  styleUrl: './query-panel.component.scss',
 })
 export class QueryPanelComponent implements OnInit {
   @Input()
@@ -19,9 +16,7 @@ export class QueryPanelComponent implements OnInit {
   public data: any[] = [];
   public queryError: string | null = null;
 
-  constructor(
-    private databaseManager: DatabaseManagerService) {
-  }
+  constructor(private databaseManager: DatabaseManagerService) {}
 
   public ngOnInit(): void {
     if (!this.query) {
@@ -37,8 +32,8 @@ export class QueryPanelComponent implements OnInit {
 
     try {
       this.data = this.databaseManager.runQuery(query);
-    } catch(error) {
-      this.queryError = (error as Error).message;;
+    } catch (error) {
+      this.queryError = (error as Error).message;
     }
   }
 }

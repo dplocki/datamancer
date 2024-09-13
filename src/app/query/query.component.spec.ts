@@ -8,10 +8,9 @@ describe('QueryComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [QueryComponent]
-    })
-    .compileComponents();
-    
+      imports: [QueryComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(QueryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

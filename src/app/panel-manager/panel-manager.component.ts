@@ -20,20 +20,22 @@ import { ImportPanelComponent } from '../import-panel/import-panel.component';
   styleUrl: './panel-manager.component.scss',
 })
 export class PanelManagerComponent implements OnInit {
-
   public tabs!: Tab[];
 
   private tabNumber = 1;
 
-  public constructor(
-    private eventBus: NgEventBus) {
-
+  public constructor(private eventBus: NgEventBus) {
     this.eventBus.on('user:select:tablename').subscribe({
-      next: (event: MetaData<unknown>) => this.onUserSelectTableName(event as MetaData<IEventDataUserSelectTableOrColumn>),
+      next: (event: MetaData<unknown>) =>
+        this.onUserSelectTableName(
+          event as MetaData<IEventDataUserSelectTableOrColumn>,
+        ),
     });
 
     this.eventBus.on('user:create:newquerytab').subscribe({
-      next: (): void => { this.tabs.push(new QueryTab(this.buildTabName(), '')); },
+      next: (): void => {
+        this.tabs.push(new QueryTab(this.buildTabName(), ''));
+      },
     });
   }
 
@@ -48,9 +50,13 @@ export class PanelManagerComponent implements OnInit {
     this.tabs.splice(index, 1);
   }
 
-  private onUserSelectTableName(event: MetaData<IEventDataUserSelectTableOrColumn>): void {
+  private onUserSelectTableName(
+    event: MetaData<IEventDataUserSelectTableOrColumn>,
+  ): void {
     const eventData = event.data;
-    this.tabs.push(new QueryTab(eventData!.table, `SELECT * FROM ${eventData!.table};`));
+    this.tabs.push(
+      new QueryTab(eventData!.table, `SELECT * FROM ${eventData!.table};`),
+    );
   }
 
   private buildTabName() {

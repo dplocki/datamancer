@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { HeaderComponent } from "./header/header.component";
+import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { SidePanelComponent } from "./side-panel/side-panel.component";
+import { SidePanelComponent } from './side-panel/side-panel.component';
 import { PanelManagerComponent } from './panel-manager/panel-manager.component';
 
 @Component({
-    selector: 'app-root',
-    standalone: true,
-    template: `
+  selector: 'app-root',
+  standalone: true,
+  template: `
     <app-header />
     <main>
       <app-panel-manager />
@@ -17,13 +17,13 @@ import { PanelManagerComponent } from './panel-manager/panel-manager.component';
     </main>
     <app-footer />
   `,
-    styleUrls: ['app.component.scss'],
-    imports: [
-        HeaderComponent,
-        FooterComponent,
-        SidePanelComponent,
-        PanelManagerComponent
-    ]
+  styleUrls: ['app.component.scss'],
+  imports: [
+    HeaderComponent,
+    FooterComponent,
+    SidePanelComponent,
+    PanelManagerComponent,
+  ],
 })
 export class AppComponent {
   title = 'Datamancer';

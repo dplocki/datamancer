@@ -1,4 +1,8 @@
-import { CollectionViewer, DataSource, SelectionChange } from '@angular/cdk/collections';
+import {
+  CollectionViewer,
+  DataSource,
+  SelectionChange,
+} from '@angular/cdk/collections';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { Component } from '@angular/core';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -13,8 +17,8 @@ import { IEventDataUserSelectTableOrColumn } from '../utils/events.interfaces';
 class DynamicFlatNode {
   constructor(
     public label: string,
-    public parent: string | null
-  ) { }
+    public parent: string | null,
+  ) {}
 }
 
 export class DynamicDataSource implements DataSource<DynamicFlatNode> {
@@ -22,44 +26,56 @@ export class DynamicDataSource implements DataSource<DynamicFlatNode> {
 
   constructor(
     private treeControl: FlatTreeControl<DynamicFlatNode>,
-    private database: DatabaseManagerService) {
+    private database: DatabaseManagerService,
+  ) {
+    this.database.getTablesList().subscribe({
+      next: (values: string[]) => {
+        this.dataSubject.next(
+          values.map(
+            (tableName: string) => new DynamicFlatNode(tableName, null),
+          ),
+        );
+      },
+    });
 
-    this.database
-      .getTablesList()
-      .subscribe({
-        next: (values: string[]) => {
-          this.dataSubject.next(values.map((tableName: string) => (new DynamicFlatNode(tableName, null))));
-        },
-      });
-
-    this.treeControl.expansionModel.changed
-      .subscribe((change: SelectionChange<DynamicFlatNode>) => {
+    this.treeControl.expansionModel.changed.subscribe(
+      (change: SelectionChange<DynamicFlatNode>) => {
         let result = this.dataSubject.value;
 
-        result = result.filter(node => node.parent === null || !change.removed.find(p => p.label === node.parent));
+        result = result.filter(
+          (node) =>
+            node.parent === null ||
+            !change.removed.find((p) => p.label === node.parent),
+        );
         this.dataSubject.next(result);
 
         if (change.added.length > 0) {
-          change.added.forEach(extendedNode => {
-
-            this.database.getTableFields(extendedNode.label)
-              .subscribe(tableFields => {
+          change.added.forEach((extendedNode) => {
+            this.database
+              .getTableFields(extendedNode.label)
+              .subscribe((tableFields) => {
                 const result = this.dataSubject.value;
 
                 result.splice(
-                  result.findIndex(p => p.label === extendedNode.label) + 1,
+                  result.findIndex((p) => p.label === extendedNode.label) + 1,
                   0,
-                  ...tableFields.map((fieldName: string) => (new DynamicFlatNode(fieldName, extendedNode.label))),
-                )
+                  ...tableFields.map(
+                    (fieldName: string) =>
+                      new DynamicFlatNode(fieldName, extendedNode.label),
+                  ),
+                );
 
                 this.dataSubject.next(result);
               });
           });
         }
-      });
+      },
+    );
   }
 
-  public connect(_collectionViewer: CollectionViewer): Observable<DynamicFlatNode[]> {
+  public connect(
+    _collectionViewer: CollectionViewer,
+  ): Observable<DynamicFlatNode[]> {
     return this.dataSubject;
   }
 
@@ -75,10 +91,10 @@ export class DynamicDataSource implements DataSource<DynamicFlatNode> {
     MatTreeModule,
     MatButtonModule,
     MatIconModule,
-    MatProgressBarModule
+    MatProgressBarModule,
   ],
   templateUrl: './tables-tree.component.html',
-  styleUrl: './tables-tree.component.scss'
+  styleUrl: './tables-tree.component.scss',
 })
 export class TablesTreeComponent {
   treeControl: FlatTreeControl<DynamicFlatNode>;
@@ -86,9 +102,12 @@ export class TablesTreeComponent {
 
   constructor(
     database: DatabaseManagerService,
-    private eventBus: NgEventBus
+    private eventBus: NgEventBus,
   ) {
-    this.treeControl = new FlatTreeControl<DynamicFlatNode>(node => node.parent === null ? 0 : 1, node => !node.parent);
+    this.treeControl = new FlatTreeControl<DynamicFlatNode>(
+      (node) => (node.parent === null ? 0 : 1),
+      (node) => !node.parent,
+    );
     this.dataSource = new DynamicDataSource(this.treeControl, database);
   }
 

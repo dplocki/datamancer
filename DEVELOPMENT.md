@@ -2,9 +2,9 @@
 
 ## Technologies
 
-* AlaSql 4.4.0
-* Angular 17.3
-* ng-event-bus 6.0.0
+- AlaSql 4.4.0
+- Angular 17.3
+- ng-event-bus 6.0.0
 
 ## Docker
 
@@ -48,10 +48,10 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## TODO
 
-* [ ] run queries to DB
-* [ ] save queries as table
-* [ ] save to csv file
-* [ ] save to json file
-* [ ] load from csv file
-* [ ] load from json file
-* [ ] load from excel file
+- [x] run queries to DB
+- [ ] save queries as table
+- [ ] save to csv file
+- [ ] save to json file
+- [x] load from csv file
+- [x] load from json file
+- [ ] load from excel file

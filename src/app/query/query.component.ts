@@ -1,4 +1,11 @@
-import { AfterViewInit, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -18,7 +25,7 @@ import { EditorState } from '@codemirror/state';
     MatInputModule,
   ],
   templateUrl: './query.component.html',
-  styleUrl: './query.component.scss'
+  styleUrl: './query.component.scss',
 })
 export class QueryComponent implements AfterViewInit {
   @Input()
@@ -40,10 +47,7 @@ export class QueryComponent implements AfterViewInit {
     const editorElement = this.queryEditor.nativeElement;
     const state = EditorState.create({
       doc: this.query,
-      extensions: [
-        basicSetup,
-        sql()
-      ],
+      extensions: [basicSetup, sql()],
     });
 
     this.editor = new EditorView({

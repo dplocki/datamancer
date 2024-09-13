@@ -7,20 +7,14 @@ import { NgEventBus } from 'ng-event-bus';
 @Component({
   selector: 'app-side-panel',
   standalone: true,
-  imports: [
-    MatButtonModule,
-    MatProgressBarModule,
-    TablesTreeComponent,
-],
+  imports: [MatButtonModule, MatProgressBarModule, TablesTreeComponent],
   templateUrl: './side-panel.component.html',
-  styleUrl: './side-panel.component.scss'
+  styleUrl: './side-panel.component.scss',
 })
 export class SidePanelComponent {
-
-  constructor(private eventBus: NgEventBus) {
-  }
+  constructor(private eventBus: NgEventBus) {}
 
   public onImportClick() {
-    this.eventBus.cast('user:select:importdata')
+    this.eventBus.cast('user:select:importdata');
   }
 }

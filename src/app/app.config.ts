@@ -6,9 +6,5 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { NgEventBus } from 'ng-event-bus';
 
 export const appConfig: ApplicationConfig = {
-  providers: [
-    provideRouter(routes),
-    provideAnimationsAsync(),
-    NgEventBus
-  ]
+  providers: [provideRouter(routes), provideAnimationsAsync(), NgEventBus],
 };

@@ -18,16 +18,16 @@ type DataType = Record<string, unknown>;
     MatButtonToggleModule,
   ],
   templateUrl: './import-panel.component.html',
-  styleUrl: './import-panel.component.scss'
+  styleUrl: './import-panel.component.scss',
 })
 export class ImportPanelComponent {
-
   public stateLabel = 'JSON';
   public rawText = '';
   public parsingError: string | null = null;
   public data: DataType[] | null = null;
 
-  private state: IImportPanelComponentState = new ImportPanelComponentStateParseJSON();
+  private state: IImportPanelComponentState =
+    new ImportPanelComponentStateParseJSON();
 
   public get isBeforeParsing(): boolean {
     return !this.state.allowParse;
@@ -73,8 +73,9 @@ interface IImportPanelComponentState {
   dataToText(data: DataType[]): string;
 }
 
-abstract class ImportPanelComponentStateBeforeParse implements IImportPanelComponentState {
-
+abstract class ImportPanelComponentStateBeforeParse
+  implements IImportPanelComponentState
+{
   public abstract textToData(text: string): DataType[];
 
   public abstract dataToText(data: DataType[]): string;
@@ -82,11 +83,9 @@ abstract class ImportPanelComponentStateBeforeParse implements IImportPanelCompo
   public get allowParse(): boolean {
     return true;
   }
-
 }
 
 class ImportPanelComponentStateParseJSON extends ImportPanelComponentStateBeforeParse {
-
   public textToData(text: string): DataType[] {
     return JSON.parse(text);
   }
@@ -94,26 +93,27 @@ class ImportPanelComponentStateParseJSON extends ImportPanelComponentStateBefore
   public dataToText(data: DataType[]): string {
     return JSON.stringify(data, null, 4);
   }
-
 }
 
 class ImportPanelComponentStateParseCSV extends ImportPanelComponentStateBeforeParse {
-
   public textToData(text: string): DataType[] {
     const data: any[] = parse(text);
-    if (!Array.isArray(data) || (data.length === 0)) {
+    if (!Array.isArray(data) || data.length === 0) {
       return data;
     }
 
     const columns = data.shift() as string[];
 
-    return data.map(datum => {
-      return columns.reduce((result: DataType, currentColumn: any, index: number) => {
-        const rawData = datum[index];
+    return data.map((datum) => {
+      return columns.reduce(
+        (result: DataType, currentColumn: any, index: number) => {
+          const rawData = datum[index];
 
-        result[currentColumn] = isNaN(rawData) ? rawData : +rawData;
-        return result;
-      }, {});
+          result[currentColumn] = isNaN(rawData) ? rawData : +rawData;
+          return result;
+        },
+        {},
+      );
     });
   }
 
@@ -123,18 +123,19 @@ class ImportPanelComponentStateParseCSV extends ImportPanelComponentStateBeforeP
     }
 
     const csvArray = [
-      (Object.keys(data[0]) as string[]),
-      ...data.map(Object.values)
+      Object.keys(data[0]) as string[],
+      ...data.map(Object.values),
     ];
 
     return stringify(csvArray);
   }
 }
 
-class ImportPanelComponentStateDisplayData implements IImportPanelComponentState {
-
+class ImportPanelComponentStateDisplayData
+  implements IImportPanelComponentState
+{
   public get allowParse(): boolean {
-    return false
+    return false;
   }
 
   public textToData(_text: string): DataType[] {
