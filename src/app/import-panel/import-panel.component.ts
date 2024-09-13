@@ -47,7 +47,7 @@ export class ImportPanelComponent {
     }
   }
 
-  public onDataFormatChange(value: any): void {
+  public onDataFormatChange(value: string): void {
     this.parsingError = null;
 
     switch (value) {
@@ -97,19 +97,19 @@ class ImportPanelComponentStateParseJSON extends ImportPanelComponentStateBefore
 
 class ImportPanelComponentStateParseCSV extends ImportPanelComponentStateBeforeParse {
   public textToData(text: string): DataType[] {
-    const data: any[] = parse(text);
+    const data: unknown[][] = parse(text);
     if (!Array.isArray(data) || data.length === 0) {
-      return data;
+      return data as [];
     }
 
     const columns = data.shift() as string[];
 
     return data.map((datum) => {
       return columns.reduce(
-        (result: DataType, currentColumn: any, index: number) => {
+        (result: DataType, currentColumn: string, index: number) => {
           const rawData = datum[index];
 
-          result[currentColumn] = isNaN(rawData) ? rawData : +rawData;
+          result[currentColumn] = isNaN(rawData as number) ? rawData : +(rawData as number);
           return result;
         },
         {},
@@ -138,11 +138,11 @@ class ImportPanelComponentStateDisplayData
     return false;
   }
 
-  public textToData(_text: string): DataType[] {
+  public textToData(): DataType[] {
     throw new Error('Method cannot be called.');
   }
 
-  public dataToText(_data: DataType[]): string {
+  public dataToText(): string {
     throw new Error('Method cannot be called.');
   }
 }
