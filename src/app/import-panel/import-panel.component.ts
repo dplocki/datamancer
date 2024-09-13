@@ -29,7 +29,7 @@ export class ImportPanelComponent {
 
   private state: IImportPanelComponentState = new ImportPanelComponentStateParseJSON();
 
-  public get isBeforeParsing() {
+  public get isBeforeParsing(): boolean {
     return !this.state.allowParse;
   }
 
@@ -47,7 +47,7 @@ export class ImportPanelComponent {
     }
   }
 
-  public onDataFormatChange(value: any) {
+  public onDataFormatChange(value: any): void {
     this.parsingError = null;
 
     switch (value) {
