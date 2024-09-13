@@ -5,8 +5,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { TableViewComponent } from '../table-view/table-view.component';
 import { stringify } from 'csv-stringify/browser/esm/sync';
 import { parse } from 'csv-parse/browser/esm/sync';
+import { DataFileFormat } from '../utils/data.file.format';
+import { DataType } from '../utils/data.type';
 
-type DataType = Record<string, unknown>;
+const PARSING_STATE = {
+  Allow: true,
+  Disable: false,
+}
 
 @Component({
   selector: 'app-import-panel',
@@ -21,7 +26,7 @@ type DataType = Record<string, unknown>;
   styleUrl: './import-panel.component.scss',
 })
 export class ImportPanelComponent {
-  public stateLabel = 'JSON';
+  public stateLabel = DataFileFormat.JSON;
   public rawText = '';
   public parsingError: string | null = null;
   public data: DataType[] | null = null;
@@ -40,7 +45,7 @@ export class ImportPanelComponent {
     try {
       this.data = this.state.textToData(this.rawText);
       this.state = new ImportPanelComponentStateDisplayData();
-      this.stateLabel = 'TAB';
+      this.stateLabel = DataFileFormat.Table;
     } catch (error) {
       this.parsingError = (error as Error).message;
       this.data = null;
@@ -51,10 +56,10 @@ export class ImportPanelComponent {
     this.parsingError = null;
 
     switch (value) {
-      case 'JSON':
+      case DataFileFormat.JSON:
         this.state = new ImportPanelComponentStateParseJSON();
         break;
-      case 'CSV':
+      case DataFileFormat.CSV:
         this.state = new ImportPanelComponentStateParseCSV();
         break;
     }
@@ -81,7 +86,7 @@ abstract class ImportPanelComponentStateBeforeParse
   public abstract dataToText(data: DataType[]): string;
 
   public get allowParse(): boolean {
-    return true;
+    return PARSING_STATE.Allow;
   }
 }
 
@@ -109,7 +114,9 @@ class ImportPanelComponentStateParseCSV extends ImportPanelComponentStateBeforeP
         (result: DataType, currentColumn: string, index: number) => {
           const rawData = datum[index];
 
-          result[currentColumn] = isNaN(rawData as number) ? rawData : +(rawData as number);
+          result[currentColumn] = isNaN(rawData as number)
+            ? rawData
+            : +(rawData as number);
           return result;
         },
         {},
@@ -135,7 +142,7 @@ class ImportPanelComponentStateDisplayData
   implements IImportPanelComponentState
 {
   public get allowParse(): boolean {
-    return false;
+    return PARSING_STATE.Disable;
   }
 
   public textToData(): DataType[] {

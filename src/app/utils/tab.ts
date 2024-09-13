@@ -1,38 +1,42 @@
+import { TabType } from './tabs.type';
+
 export abstract class Tab {
-  public get tabName(): string {
-    return this._tabName;
+  public get name(): string {
+    return this.tabName;
   }
 
   abstract get initializeParamater(): string;
 
-  abstract get tabType(): string;
+  abstract get type(): string;
 
-  constructor(private _tabName: string) {}
+  constructor(private tabName: string) {}
 }
 
 export class QueryTab extends Tab {
   public override get initializeParamater(): string {
-    return this._startingQuery;
+    return this.startingQuery;
   }
 
-  public override get tabType() {
-    return 'QUERY';
+  public override get type() {
+    return TabType.SQLQuery;
   }
 
   constructor(
-    _tabName: string,
-    private _startingQuery: string,
+    tabName: string,
+    private startingQuery: string,
   ) {
-    super(_tabName);
+    super(tabName);
   }
 }
 
 export class ImportTab extends Tab {
-  public override get tabType(): string {
-    return 'IMPORT';
+  private static readonly ImportInitParamater: string = '';
+
+  public override get type(): string {
+    return TabType.ImportData;
   }
 
   public override get initializeParamater(): string {
-    return '';
+    return ImportTab.ImportInitParamater;
   }
 }

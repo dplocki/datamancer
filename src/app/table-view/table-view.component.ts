@@ -9,6 +9,7 @@ import {
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
+import { DataType } from '../utils/data.type';
 
 export interface PeriodicElement {
   name: string;
@@ -26,15 +27,14 @@ export interface PeriodicElement {
 })
 export class TableViewComponent implements OnChanges, AfterViewInit {
   @Input()
-  public data: any[] | null = null;
+  public data: DataType[] | null = null;
 
   public displayedColumns!: string[];
-  public dataSource: MatTableDataSource<any> = new MatTableDataSource<any>([]);
+  public dataSource: MatTableDataSource<DataType> =
+    new MatTableDataSource<DataType>([]);
 
   @ViewChild(MatPaginator) paginator: MatPaginator = {} as MatPaginator;
   @ViewChild(MatSort) sort: MatSort = {} as MatSort;
-
-  constructor() {}
 
   public isTableEmpty(): boolean {
     return this.dataSource.data.length === 0;

@@ -1,8 +1,4 @@
-import {
-  CollectionViewer,
-  DataSource,
-  SelectionChange,
-} from '@angular/cdk/collections';
+import { DataSource, SelectionChange } from '@angular/cdk/collections';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { Component } from '@angular/core';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -73,13 +69,11 @@ export class DynamicDataSource implements DataSource<DynamicFlatNode> {
     );
   }
 
-  public connect(
-    _collectionViewer: CollectionViewer,
-  ): Observable<DynamicFlatNode[]> {
+  public connect(): Observable<DynamicFlatNode[]> {
     return this.dataSubject;
   }
 
-  public disconnect(_collectionViewer: CollectionViewer): void {
+  public disconnect(): void {
     this.dataSubject.complete();
   }
 }

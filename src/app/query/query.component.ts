@@ -1,6 +1,7 @@
 import {
   AfterViewInit,
   Component,
+  ElementRef,
   EventEmitter,
   Input,
   Output,
@@ -35,11 +36,11 @@ export class QueryComponent implements AfterViewInit {
   public executeQuery = new EventEmitter<string>();
 
   @ViewChild('queryEditor')
-  public queryEditor: any;
+  public queryEditor!: ElementRef<HTMLDivElement>;
 
   private editor!: EditorView;
 
-  public runQuery(_event: MouseEvent) {
+  public runQuery(): void {
     this.executeQuery.emit(this.editor.state.doc.toString());
   }
 

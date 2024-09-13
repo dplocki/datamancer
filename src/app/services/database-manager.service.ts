@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import alasql from 'alasql';
-import { BehaviorSubject, Observable, map, of } from 'rxjs';
+import { BehaviorSubject, Observable, map } from 'rxjs';
+import { DataType } from '../utils/data.type';
 
 @Injectable({
   providedIn: 'root',
@@ -48,11 +49,11 @@ export class DatabaseManagerService {
     return this.db.pipe(map((database) => database[tableName]));
   }
 
-  public getTableData(tableName: string): any[] {
+  public getTableData(tableName: string): DataType[] {
     return alasql.tables[tableName].data;
   }
 
-  public runQuery(sqlQuery: string): any[] {
+  public runQuery(sqlQuery: string): DataType[] {
     return alasql(sqlQuery);
   }
 }

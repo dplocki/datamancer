@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { TableViewComponent } from '../table-view/table-view.component';
 import { QueryComponent } from '../query/query.component';
 import { DatabaseManagerService } from '../services/database-manager.service';
+import { DataType } from '../utils/data.type';
 
 @Component({
   selector: 'app-query-panel',
@@ -13,7 +14,7 @@ import { DatabaseManagerService } from '../services/database-manager.service';
 export class QueryPanelComponent implements OnInit {
   @Input()
   public query = '';
-  public data: any[] = [];
+  public data: DataType[] = [];
   public queryError: string | null = null;
 
   constructor(private databaseManager: DatabaseManagerService) {}
