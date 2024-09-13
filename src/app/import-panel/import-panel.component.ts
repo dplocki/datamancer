@@ -6,6 +6,8 @@ import { TableViewComponent } from '../table-view/table-view.component';
 import { stringify } from 'csv-stringify/browser/esm/sync';
 import { parse } from 'csv-parse/browser/esm/sync';
 
+type DataType = Record<string, unknown>;
+
 @Component({
   selector: 'app-import-panel',
   standalone: true,
@@ -23,7 +25,7 @@ export class ImportPanelComponent {
   public stateLabel: string = 'JSON';
   public rawText: string = '';
   public parsingError: string | null = null;
-  public data: any[] | null = null;
+  public data: DataType[] | null = null;
 
   private state: IImportPanelComponentState = new ImportPanelComponentStateParseJSON();
 
@@ -66,16 +68,16 @@ export class ImportPanelComponent {
 interface IImportPanelComponentState {
   get allowParse(): boolean;
 
-  textToData(text: string): any[];
+  textToData(text: string): DataType[];
 
-  dataToText(data: any[]): string;
+  dataToText(data: DataType[]): string;
 }
 
 abstract class ImportPanelComponentStateBeforeParse implements IImportPanelComponentState {
 
-  public abstract textToData(text: string): any[];
+  public abstract textToData(text: string): DataType[];
 
-  public abstract dataToText(data: any[]): string;
+  public abstract dataToText(data: DataType[]): string;
 
   public get allowParse(): boolean {
     return true;
@@ -85,27 +87,27 @@ abstract class ImportPanelComponentStateBeforeParse implements IImportPanelCompo
 
 class ImportPanelComponentStateParseJSON extends ImportPanelComponentStateBeforeParse {
 
-  public textToData(text: string): any[] {
+  public textToData(text: string): DataType[] {
     return JSON.parse(text);
   }
 
-  public dataToText(data: any[]): string {
+  public dataToText(data: DataType[]): string {
     return JSON.stringify(data, null, 4);
   }
 }
 
 class ImportPanelComponentStateParseCSV extends ImportPanelComponentStateBeforeParse {
 
-  public textToData(text: string): any[] {
+  public textToData(text: string): DataType[] {
     const data: any[] = parse(text);
     if (!Array.isArray(data) || (data.length === 0)) {
       return data;
     }
 
-    const columns: string[] = data.shift();
+    const columns = data.shift() as string[];
 
     return data.map(datum => {
-      return columns.reduce((result: Record<string, any>, currentColumn: any, index: number) => {
+      return columns.reduce((result: DataType, currentColumn: any, index: number) => {
         const rawData = datum[index];
 
         result[currentColumn] = isNaN(rawData) ? rawData : +rawData;
@@ -114,13 +116,13 @@ class ImportPanelComponentStateParseCSV extends ImportPanelComponentStateBeforeP
     });
   }
 
-  public dataToText(data: any[]): string {
+  public dataToText(data: DataType[]): string {
     if (data.length === 0) {
       return '';
     }
 
     const csvArray = [
-      (Object.keys(data[0]) as any[]),
+      (Object.keys(data[0]) as string[]),
       ...data.map(Object.values)
     ];
 
@@ -134,11 +136,11 @@ class ImportPanelComponentStateDisplayData implements IImportPanelComponentState
     return false
   }
 
-  public textToData(_text: string): any[] {
+  public textToData(_text: string): DataType[] {
     throw new Error('Method cannot be called.');
   }
 
-  public dataToText(_data: any[]): string {
+  public dataToText(_data: DataType[]): string {
     throw new Error('Method cannot be called.');
   }
 }
