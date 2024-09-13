@@ -11,7 +11,7 @@ import { DataType } from '../utils/data.type';
 const PARSING_STATE = {
   Allow: true,
   Disable: false,
-}
+};
 
 @Component({
   selector: 'app-import-panel',
