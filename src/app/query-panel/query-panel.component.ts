@@ -15,7 +15,7 @@ import { DatabaseManagerService } from '../services/database-manager.service';
 })
 export class QueryPanelComponent implements OnInit {
   @Input()
-  public query: string = '';
+  public query = '';
   public data: any[] = [];
   public queryError: string | null = null;
 

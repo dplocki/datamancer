@@ -29,8 +29,8 @@ export class TableViewComponent implements OnChanges, AfterViewInit {
   public displayedColumns!: string[];
   public dataSource: MatTableDataSource<any> = new MatTableDataSource<any>([]);
 
-  @ViewChild(MatPaginator) paginator: MatPaginator = <MatPaginator>{};
-  @ViewChild(MatSort) sort: MatSort = <MatSort>{};
+  @ViewChild(MatPaginator) paginator: MatPaginator = {} as MatPaginator;
+  @ViewChild(MatSort) sort: MatSort = {} as MatSort;
 
   constructor() {
   }

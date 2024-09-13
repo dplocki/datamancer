@@ -23,7 +23,7 @@ export class PanelManagerComponent implements OnInit {
 
   public tabs!: Tab[];
 
-  private tabNumber: number = 1;
+  private tabNumber = 1;
 
   public constructor(
     private eventBus: NgEventBus) {

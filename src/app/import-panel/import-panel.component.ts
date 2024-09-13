@@ -22,8 +22,8 @@ type DataType = Record<string, unknown>;
 })
 export class ImportPanelComponent {
 
-  public stateLabel: string = 'JSON';
-  public rawText: string = '';
+  public stateLabel = 'JSON';
+  public rawText = '';
   public parsingError: string | null = null;
   public data: DataType[] | null = null;
 
@@ -94,6 +94,7 @@ class ImportPanelComponentStateParseJSON extends ImportPanelComponentStateBefore
   public dataToText(data: DataType[]): string {
     return JSON.stringify(data, null, 4);
   }
+
 }
 
 class ImportPanelComponentStateParseCSV extends ImportPanelComponentStateBeforeParse {

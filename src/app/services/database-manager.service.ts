@@ -7,7 +7,7 @@ import { BehaviorSubject, Observable, map, of } from 'rxjs';
 })
 export class DatabaseManagerService {
 
-  private db: BehaviorSubject<{ [key: string]: string[] }> = new BehaviorSubject<{ [key: string]: string[] }>({});
+  private db: BehaviorSubject<Record<string, string[]>> = new BehaviorSubject<Record<string, string[]>>({});
 
   constructor() {
     fetch('./assets/movies.database.json')
@@ -26,7 +26,7 @@ export class DatabaseManagerService {
   public setTable(data: unknown[], tableName: string): void {
     alasql(`CREATE TABLE ${tableName}; SELECT * INTO ${tableName} FROM ?`, [data]);
 
-    const tableState = Object.keys(alasql.tables).reduce((result: { [key: string]: string[] }, tableName: string) => {
+    const tableState = Object.keys(alasql.tables).reduce((result: Record<string, string[]>, tableName: string) => {
       result[tableName] = Object.keys(alasql.tables[tableName].data[0]);
       return result;
     }, {});
