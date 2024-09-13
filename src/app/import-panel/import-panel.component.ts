@@ -71,13 +71,19 @@ interface IImportPanelComponentState {
   dataToText(data: any[]): string;
 }
 
-class ImportPanelComponentStateBeforeParse {
+abstract class ImportPanelComponentStateBeforeParse implements IImportPanelComponentState {
+
+  public abstract textToData(text: string): any[];
+
+  public abstract dataToText(data: any[]): string;
+
   public get allowParse(): boolean {
     return true;
   }
+
 }
 
-class ImportPanelComponentStateParseJSON extends ImportPanelComponentStateBeforeParse implements IImportPanelComponentState {
+class ImportPanelComponentStateParseJSON extends ImportPanelComponentStateBeforeParse {
 
   public textToData(text: string): any[] {
     return JSON.parse(text);
@@ -88,7 +94,7 @@ class ImportPanelComponentStateParseJSON extends ImportPanelComponentStateBefore
   }
 }
 
-class ImportPanelComponentStateParseCSV extends ImportPanelComponentStateBeforeParse implements IImportPanelComponentState {
+class ImportPanelComponentStateParseCSV extends ImportPanelComponentStateBeforeParse {
 
   public textToData(text: string): any[] {
     const data: any[] = parse(text);
