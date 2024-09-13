@@ -1,10 +1,10 @@
 <mat-tab-group mat-stretch-tabs="false">
   @for (tab of tabs; track tab; let index = $index) {
-    @switch (tab.tabType) {
-      @case ("QUERY") {
-        <mat-tab [label]="tab.tabName">
+    @switch (tab.type) {
+      @case (TabType.SQLQuery) {
+        <mat-tab [label]="tab.name">
           <ng-template mat-tab-label>
-            {{ tab.tabName }}
+            {{ tab.name }}
             <mat-icon (click)="closeTab(index); $event.stopPropagation()"
               >close</mat-icon
             >
@@ -14,10 +14,10 @@
         </mat-tab>
       }
 
-      @case ("IMPORT") {
-        <mat-tab [label]="tab.tabName">
+      @case (TabType.ImportData) {
+        <mat-tab [label]="tab.name">
           <ng-template mat-tab-label>
-            {{ tab.tabName }}
+            {{ tab.name }}
             <mat-icon (click)="closeTab(index); $event.stopPropagation()"
               >close</mat-icon
             >

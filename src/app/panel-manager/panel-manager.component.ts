@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { ImportTab, QueryTab, Tab } from '../utils/tab';
 import { QueryPanelComponent } from '../query-panel/query-panel.component';
 import { ImportPanelComponent } from '../import-panel/import-panel.component';
+import { TabType } from '../utils/tabs.type';
 
 @Component({
   selector: 'app-panel-manager',
@@ -23,6 +24,8 @@ export class PanelManagerComponent implements OnInit {
   public tabs!: Tab[];
 
   private tabNumber = 1;
+
+  public TabType = TabType;
 
   public constructor(private eventBus: NgEventBus) {
     this.eventBus.on('user:select:tablename').subscribe({
