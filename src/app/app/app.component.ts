@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
-import { SidePanelComponent } from './side-panel/side-panel.component';
-import { PanelManagerComponent } from './panel-manager/panel-manager.component';
+import { HeaderComponent } from '../header/header.component';
+import { FooterComponent } from '../footer/footer.component';
+import { SidePanelComponent } from '../side-panel/side-panel.component';
+import { PanelManagerComponent } from '../panel-manager/panel-manager.component';
 
 @Component({
   selector: 'app-root',
