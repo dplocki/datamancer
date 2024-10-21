@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatButtonModule } from '@angular/material/button';
 import { TablesTreeComponent } from '../tables-tree/tables-tree.component';
-import { NgEventBus } from 'ng-event-bus';
+import { MatDialog } from '@angular/material/dialog';
+import { ImportDialogComponent } from '../import-dialog/import-dialog.component';
 
 @Component({
   selector: 'app-side-panel',
@@ -12,9 +13,13 @@ import { NgEventBus } from 'ng-event-bus';
   styleUrl: './side-panel.component.scss',
 })
 export class SidePanelComponent {
-  constructor(private eventBus: NgEventBus) {}
+  readonly dialog = inject(MatDialog);
 
   public onImportClick() {
-    this.eventBus.cast('user:select:importdata');
+    this.dialog.open(ImportDialogComponent, {
+      width: '250px',
+      enterAnimationDuration: '100ms',
+      exitAnimationDuration: '100ms',
+    });
   }
 }
