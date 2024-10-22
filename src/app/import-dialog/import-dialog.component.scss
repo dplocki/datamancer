@@ -1,0 +1,15 @@
+.upload-container {
+  max-width: 500px;
+  margin: 20px auto;
+}
+
+.file-input-container {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 20px 0;
+}
+
+.file-name {
+  color: rgba(0, 0, 0, 0.87);
+}

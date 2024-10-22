@@ -1,7 +1,38 @@
 <h2 mat-dialog-title>Import file</h2>
+
 <mat-dialog-content>
   Provide the file to import
+  <div class="file-input-container">
+    <button mat-raised-button color="primary" (click)="fileInput.click()">
+      Choose file
+    </button>
+    <input
+      #fileInput
+      type="file"
+      [multiple]="false"
+      (change)="onFileSelected($event)"
+      style="display: none"
+    />
+
+    @if (selectedFile) {
+      <span class="file-name">
+        {{ selectedFile.name }}
+      </span>
+
+      <button mat-button (click)="resetForm()" >Clear</button>
+    }
+  </div>
+
+  <input
+    #fileInput
+    type="file"
+    [multiple]="false"
+    (change)="onFileSelected($event)"
+    style="display: none"
+  />
+
 </mat-dialog-content>
+
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Cancel</button>
   <button mat-button mat-dialog-close cdkFocusInitial>Import</button>
