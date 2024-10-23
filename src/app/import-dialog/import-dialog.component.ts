@@ -18,7 +18,7 @@ export class ImportDialogComponent {
   public uploadProgress: number = 0;
   public uploading: boolean = false;
 
-  public  onFileSelected(event: any): void {
+  public onFileSelected(event: any): void {
     const file = event.target.files[0];
 
     if (file) {
@@ -33,8 +33,17 @@ export class ImportDialogComponent {
     }
 
     this.uploading = true;
-    const formData = new FormData();
-    formData.append('file', this.selectedFile);
+
+    const reader = new FileReader();
+    reader.addEventListener(
+      "load",
+      () => {
+        console.log(reader.result);
+      },
+      false,
+    );
+
+    reader.readAsText(this.selectedFile);
   }
 
   public resetForm(): void {
