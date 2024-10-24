@@ -17,9 +17,9 @@ export class SidePanelComponent {
 
   public onImportClick() {
     this.dialog.open(ImportDialogComponent, {
-      width: '250px',
-      enterAnimationDuration: '100ms',
-      exitAnimationDuration: '100ms',
+      width: '80%',
+      enterAnimationDuration: '400ms',
+      exitAnimationDuration: '400ms',
     });
   }
 }
