@@ -7,6 +7,7 @@ import { stringify } from 'csv-stringify/browser/esm/sync';
 import { parse } from 'csv-parse/browser/esm/sync';
 import { DataFileFormat } from '../utils/data.file.format';
 import { DataType } from '../utils/data.type';
+import { DataFilesParserService } from '../services/data-files-paser.service';
 
 const PARSING_STATE = {
   Allow: true,
@@ -34,6 +35,9 @@ export class ImportPanelComponent {
   private state: IImportPanelComponentState =
     new ImportPanelComponentStateParseJSON();
 
+  constructor(private dataFilesParserService: DataFilesParserService) {
+  }
+
   public get isBeforeParsing(): boolean {
     return !this.state.allowParse;
   }
@@ -60,7 +64,7 @@ export class ImportPanelComponent {
         this.state = new ImportPanelComponentStateParseJSON();
         break;
       case DataFileFormat.CSV:
-        this.state = new ImportPanelComponentStateParseCSV();
+        this.state = new ImportPanelComponentStateParseCSV(this.dataFilesParserService);
         break;
     }
 
@@ -101,27 +105,13 @@ class ImportPanelComponentStateParseJSON extends ImportPanelComponentStateBefore
 }
 
 class ImportPanelComponentStateParseCSV extends ImportPanelComponentStateBeforeParse {
+
+  constructor(private dataFilesParserService: DataFilesParserService) {
+    super();
+  }
+
   public textToData(text: string): DataType[] {
-    const data: unknown[][] = parse(text);
-    if (!Array.isArray(data) || data.length === 0) {
-      return data as [];
-    }
-
-    const columns = data.shift() as string[];
-
-    return data.map((datum) => {
-      return columns.reduce(
-        (result: DataType, currentColumn: string, index: number) => {
-          const rawData = datum[index];
-
-          result[currentColumn] = isNaN(rawData as number)
-            ? rawData
-            : +(rawData as number);
-          return result;
-        },
-        {},
-      );
-    });
+    return this.dataFilesParserService.parseCSV(text);
   }
 
   public dataToText(data: DataType[]): string {
