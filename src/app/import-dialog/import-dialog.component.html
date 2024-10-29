@@ -3,6 +3,16 @@
 <mat-dialog-content>
   Provide the file to import
   <div class="file-input-container">
+    <mat-form-field class="example-form-field">
+      <mat-label>Clearable input</mat-label>
+      <input matInput type="text" [(ngModel)]="fileName">
+      @if (fileName) {
+        <button matSuffix mat-icon-button aria-label="Clear" (click)="fileName=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      }
+    </mat-form-field>
+
     <button mat-raised-button color="primary" (click)="fileInput.click()">
       Choose file
     </button>
@@ -22,14 +32,6 @@
       <button mat-button (click)="resetForm()" >Clear</button>
     }
   </div>
-
-  <input
-    #fileInput
-    type="file"
-    [multiple]="false"
-    (change)="onFileSelected($event)"
-    style="display: none"
-  />
 
 </mat-dialog-content>
 

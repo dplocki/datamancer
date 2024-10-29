@@ -4,11 +4,26 @@ import { MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDi
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { DataFilesParserService } from '../services/data-files-paser.service';
 import { DatabaseManagerService } from '../services/database-manager.service';
+import { MatIconModule } from '@angular/material/icon';
+import { FormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-import-dialog',
   standalone: true,
-  imports: [MatButtonModule, MatProgressBarModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent],
+  imports: [
+    FormsModule,
+    MatButtonModule,
+    MatDialogActions,
+    MatDialogClose,
+    MatDialogContent,
+    MatDialogTitle,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatProgressBarModule,
+  ],
   templateUrl: './import-dialog.component.html',
   styleUrl: './import-dialog.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -19,14 +34,18 @@ export class ImportDialogComponent {
   public selectedFile: File | null = null;
   public uploadProgress: number = 0;
   public uploading: boolean = false;
+  public fileName: string = '';
 
   constructor(
     private dataFilesParserService: DataFilesParserService,
     private databaseManagerService: DatabaseManagerService) {
   }
 
-  public onFileSelected(event: any): void {
-    const file = event.target.files[0];
+  public onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const file = (input.files as FileList)[0];
+
+    this.fileName = file.name;
 
     if (file) {
       this.selectedFile = file;
@@ -45,9 +64,9 @@ export class ImportDialogComponent {
     reader.addEventListener(
       "load",
       () => {
-        this.databaseManagerService.setTable(
-          this.dataFilesParserService.parseCSV(reader.result as string),
-          'abc');
+        const fileConent = this.dataFilesParserService.parseCSV(reader.result as string);
+
+        this.databaseManagerService.setTable(fileConent, this.fileName);
       },
       false,
     );
@@ -59,5 +78,6 @@ export class ImportDialogComponent {
     this.selectedFile = null;
     this.uploadProgress = 0;
     this.uploading = false;
+    this.fileName = '';
   }
 }
