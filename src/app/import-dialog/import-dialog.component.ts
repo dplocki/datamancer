@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { DataFilesParserService } from '../services/data-files-paser.service';
 
 @Component({
   selector: 'app-import-dialog',
@@ -17,6 +18,9 @@ export class ImportDialogComponent {
   public selectedFile: File | null = null;
   public uploadProgress: number = 0;
   public uploading: boolean = false;
+
+  constructor(private dataFilesParserService: DataFilesParserService) {
+  }
 
   public onFileSelected(event: any): void {
     const file = event.target.files[0];
@@ -38,7 +42,7 @@ export class ImportDialogComponent {
     reader.addEventListener(
       "load",
       () => {
-        console.log(reader.result);
+        console.log(this.dataFilesParserService.parseCSV(reader.result as string));
       },
       false,
     );
