@@ -3,6 +3,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { DataFilesParserService } from '../services/data-files-paser.service';
+import { DatabaseManagerService } from '../services/database-manager.service';
 
 @Component({
   selector: 'app-import-dialog',
@@ -19,7 +20,9 @@ export class ImportDialogComponent {
   public uploadProgress: number = 0;
   public uploading: boolean = false;
 
-  constructor(private dataFilesParserService: DataFilesParserService) {
+  constructor(
+    private dataFilesParserService: DataFilesParserService,
+    private databaseManagerService: DatabaseManagerService) {
   }
 
   public onFileSelected(event: any): void {
@@ -42,7 +45,9 @@ export class ImportDialogComponent {
     reader.addEventListener(
       "load",
       () => {
-        console.log(this.dataFilesParserService.parseCSV(reader.result as string));
+        this.databaseManagerService.setTable(
+          this.dataFilesParserService.parseCSV(reader.result as string),
+          'abc');
       },
       false,
     );
