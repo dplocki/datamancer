@@ -34,7 +34,8 @@
 
   <mat-form-field>
     <mat-label>Type of imported data</mat-label>
-    <mat-select>
+    <mat-select [(ngModel)]="selectedDataType">
+      <mat-option value="">Unknown</mat-option>
       <mat-option value="csv">CSV</mat-option>
       <mat-option value="json">JSON</mat-option>
     </mat-select>

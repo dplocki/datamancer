@@ -37,6 +37,7 @@ export class ImportDialogComponent {
   public uploadProgress: number = 0;
   public uploading: boolean = false;
   public filename: string = '';
+  public selectedDataType: string = '';
 
   constructor(
     private dataFilesParserService: DataFilesParserService,
