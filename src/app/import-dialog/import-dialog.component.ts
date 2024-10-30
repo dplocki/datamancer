@@ -50,6 +50,14 @@ export class ImportDialogComponent {
 
     this.filename = file.name;
 
+    if (file.name.endsWith('.csv')) {
+      this.selectedDataType = 'csv';
+    } else if (file.name.endsWith('.json')) {
+      this.selectedDataType = 'json';
+    } else {
+      this.selectedDataType = '';
+    }
+
     if (file) {
       this.selectedFile = file;
       this.uploadProgress = 0;
@@ -82,5 +90,6 @@ export class ImportDialogComponent {
     this.uploadProgress = 0;
     this.uploading = false;
     this.filename = '';
+    this.selectedDataType = '';
   }
 }
