@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-import-dialog',
@@ -22,6 +23,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
+    MatSelectModule,
     MatProgressBarModule,
   ],
   templateUrl: './import-dialog.component.html',
@@ -34,7 +36,7 @@ export class ImportDialogComponent {
   public selectedFile: File | null = null;
   public uploadProgress: number = 0;
   public uploading: boolean = false;
-  public fileName: string = '';
+  public filename: string = '';
 
   constructor(
     private dataFilesParserService: DataFilesParserService,
@@ -45,7 +47,7 @@ export class ImportDialogComponent {
     const input = event.target as HTMLInputElement;
     const file = (input.files as FileList)[0];
 
-    this.fileName = file.name;
+    this.filename = file.name;
 
     if (file) {
       this.selectedFile = file;
@@ -66,7 +68,7 @@ export class ImportDialogComponent {
       () => {
         const fileConent = this.dataFilesParserService.parseCSV(reader.result as string);
 
-        this.databaseManagerService.setTable(fileConent, this.fileName);
+        this.databaseManagerService.setTable(fileConent, this.filename);
       },
       false,
     );
@@ -78,6 +80,6 @@ export class ImportDialogComponent {
     this.selectedFile = null;
     this.uploadProgress = 0;
     this.uploading = false;
-    this.fileName = '';
+    this.filename = '';
   }
 }

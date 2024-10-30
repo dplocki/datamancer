@@ -1,21 +1,10 @@
 <h2 mat-dialog-title>Import file</h2>
 
 <mat-dialog-content>
-  Provide the file to import
-  <div class="file-input-container">
-    <mat-form-field class="example-form-field">
-      <mat-label>Clearable input</mat-label>
-      <input matInput type="text" [(ngModel)]="fileName">
-      @if (fileName) {
-        <button matSuffix mat-icon-button aria-label="Clear" (click)="fileName=''">
-          <mat-icon>close</mat-icon>
-        </button>
-      }
-    </mat-form-field>
-
-    <button mat-raised-button color="primary" (click)="fileInput.click()">
-      Choose file
-    </button>
+  <div class="file-input-container" (click)="fileInput.click()">
+    @if (!selectedFile) {
+      <mat-label>Select the file</mat-label>
+    }
     <input
       #fileInput
       type="file"
@@ -32,6 +21,24 @@
       <button mat-button (click)="resetForm()" >Clear</button>
     }
   </div>
+
+  <mat-form-field>
+    <mat-label>Table name</mat-label>
+    <input matInput type="text" [(ngModel)]="filename">
+    @if (filename) {
+      <button matSuffix mat-icon-button aria-label="Clear" (click)="filename=''">
+        <mat-icon>close</mat-icon>
+      </button>
+    }
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Select</mat-label>
+    <mat-select>
+      <mat-option value="one">First option</mat-option>
+      <mat-option value="two">Second option</mat-option>
+    </mat-select>
+  </mat-form-field>
 
 </mat-dialog-content>
 

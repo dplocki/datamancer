@@ -1,15 +1,18 @@
-.upload-container {
-  max-width: 500px;
-  margin: 20px auto;
+mat-dialog-content {
+  display: flex;
+  flex-direction: column;
 }
 
 .file-input-container {
   display: flex;
   align-items: center;
   gap: 16px;
-  margin: 20px 0;
+  padding: 16px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  margin-bottom: 20px;
 }
 
-.file-name {
-  color: rgba(0, 0, 0, 0.87);
+.file-input-container button {
+  margin-left: auto;
 }
