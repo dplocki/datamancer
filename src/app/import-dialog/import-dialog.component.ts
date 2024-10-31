@@ -48,7 +48,7 @@ export class ImportDialogComponent {
     const input = event.target as HTMLInputElement;
     const file = (input.files as FileList)[0];
 
-    this.filename = file.name;
+    this.filename = file.name.substring(0, file.name.lastIndexOf('.')).replaceAll(/\.[^/.]+$/g, '').toLocaleLowerCase();
 
     if (file.name.endsWith('.csv')) {
       this.selectedDataType = 'csv';
