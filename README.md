@@ -1,4 +1,4 @@
-# Datamancer
+# 🗃️ Datamancer
 
 ![GitHub License](https://img.shields.io/github/license/dplocki/datamancer)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/88bbfb21-a1a3-476c-8cda-70ca565e0b2f/deploy-status)](https://app.netlify.com/sites/datamancer/deploys)
