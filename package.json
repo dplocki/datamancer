@@ -28,8 +28,7 @@
     "csv-parse": "^5.5.6",
     "csv-stringify": "^6.5.1",
     "ng-event-bus": "^7.0.1",
-    "rxjs": "~7.8.0",
-    "tslib": "^2.3.0"
+    "rxjs": "~7.8.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^18.2.10",
@@ -54,7 +53,7 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "ng-event-bus": "^7.0.1",
     "prettier": "^3.3.3",
-    "tslib": "^2.8.0",
+    "tslib": "^2.8.1",
     "typescript": "~5.4.2",
     "typescript-eslint": "8.2.0"
   }
