@@ -85,11 +85,13 @@ export class ImportDialogComponent {
     reader.readAsText(this.selectedFile);
   }
 
-  public resetForm(): void {
+  public resetForm(event: Event): void {
     this.selectedFile = null;
     this.uploadProgress = 0;
     this.uploading = false;
     this.filename = '';
     this.selectedDataType = '';
+
+    event.stopPropagation();
   }
 }

@@ -3,7 +3,7 @@
 <mat-dialog-content>
   <div class="file-input-container" (click)="fileInput.click()">
     @if (!selectedFile) {
-      <mat-label>Select the file</mat-label>
+      <mat-label>Upload the file</mat-label>
     }
     <input
       #fileInput
@@ -18,7 +18,7 @@
         {{ selectedFile.name }}
       </span>
 
-      <button mat-button (click)="resetForm()" >Clear</button>
+      <button mat-button (click)="resetForm($event)" >Clear</button>
     }
   </div>
 
