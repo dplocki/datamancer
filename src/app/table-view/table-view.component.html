@@ -1,8 +1,8 @@
 @if (isTableEmpty()) {
   <div>No data</div>
 }
-<div class="example-container mat-elevation-z8">
-  <div class="example-table-container">
+<div class="container mat-elevation-z8">
+  <div class="table-container">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
       @for (column of displayedColumns; track column) {
         <ng-container [matColumnDef]="column">

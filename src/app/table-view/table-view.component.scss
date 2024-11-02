@@ -1,9 +1,8 @@
-/* Structure */
-.example-container {
+.container {
   position: relative;
 }
 
-.example-table-container {
+.table-container {
   position: relative;
   min-height: 200px;
   overflow: auto;
@@ -13,7 +12,7 @@ table {
   width: 100%;
 }
 
-.example-loading-shade {
+.loading-shade {
   position: absolute;
   top: 0;
   left: 0;
@@ -24,11 +23,6 @@ table {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.example-rate-limit-reached {
-  max-width: 360px;
-  text-align: center;
 }
 
 .mat-column-number,
