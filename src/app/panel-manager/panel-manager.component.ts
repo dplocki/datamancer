@@ -58,7 +58,7 @@ export class PanelManagerComponent implements OnInit {
   ): void {
     const eventData = event.data;
     this.tabs.push(
-      new QueryTab(eventData!.table, `SELECT * FROM ${eventData!.table};`),
+      new QueryTab(eventData!.table, `SELECT * FROM \`${eventData!.table}\`;`),
     );
   }
 

@@ -26,7 +26,7 @@ export class DatabaseManagerService {
   }
 
   public setTable(data: DataType[], tableName: string): void {
-    alasql(`CREATE TABLE ${tableName}; SELECT * INTO ${tableName} FROM ?`, [
+    alasql(`CREATE TABLE \`${tableName}\`; SELECT * INTO \`${tableName}\` FROM ?`, [
       data,
     ]);
 
