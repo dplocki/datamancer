@@ -29,9 +29,7 @@
               "src/styles.scss"
             ],
             "scripts": [],
-            "allowedCommonJsDependencies": [
-              "alasql"
-            ]
+            "allowedCommonJsDependencies": ["alasql"]
           },
           "configurations": {
             "production": {

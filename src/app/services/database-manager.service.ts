@@ -26,9 +26,10 @@ export class DatabaseManagerService {
   }
 
   public setTable(data: DataType[], tableName: string): void {
-    alasql(`CREATE TABLE \`${tableName}\`; SELECT * INTO \`${tableName}\` FROM ?`, [
-      data,
-    ]);
+    alasql(
+      `CREATE TABLE \`${tableName}\`; SELECT * INTO \`${tableName}\` FROM ?`,
+      [data],
+    );
 
     const tableState = Object.keys(alasql.tables).reduce(
       (result: Record<string, string[]>, tableName: string) => {

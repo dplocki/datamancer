@@ -1,12 +1,11 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import { parse } from 'csv-parse/browser/esm/sync';
-import { DataType } from "../utils/data.type";
+import { DataType } from '../utils/data.type';
 
 @Injectable({
-    providedIn: 'root',
+  providedIn: 'root',
 })
 export class DataFilesParserService {
-
   public parseCSV(content: string): DataType[] {
     const data: unknown[][] = parse(content);
     if (!Array.isArray(data) || data.length === 0) {
@@ -29,5 +28,4 @@ export class DataFilesParserService {
       );
     });
   }
-
 }

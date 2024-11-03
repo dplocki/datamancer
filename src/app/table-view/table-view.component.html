@@ -3,7 +3,12 @@
     @if (isTableEmpty()) {
       <div class="empty mat-elevation-z8">No data</div>
     } @else {
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+      <table
+        mat-table
+        [dataSource]="dataSource"
+        class="mat-elevation-z8"
+        matSort
+      >
         @for (column of displayedColumns; track column) {
           <ng-container [matColumnDef]="column">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>
@@ -19,5 +24,8 @@
     }
   </div>
 
-  <mat-paginator pageSize="25" [pageSizeOptions]="[5, 10, 25, 50, 100]"></mat-paginator>
+  <mat-paginator
+    pageSize="25"
+    [pageSizeOptions]="[5, 10, 25, 50, 100]"
+  ></mat-paginator>
 </div>

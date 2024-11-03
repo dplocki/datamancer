@@ -1,6 +1,12 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
+import {
+  MatDialogActions,
+  MatDialogClose,
+  MatDialogContent,
+  MatDialogRef,
+  MatDialogTitle,
+} from '@angular/material/dialog';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { DataFilesParserService } from '../services/data-files-paser.service';
 import { DatabaseManagerService } from '../services/database-manager.service';
@@ -41,14 +47,17 @@ export class ImportDialogComponent {
 
   constructor(
     private dataFilesParserService: DataFilesParserService,
-    private databaseManagerService: DatabaseManagerService) {
-  }
+    private databaseManagerService: DatabaseManagerService,
+  ) {}
 
   public onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     const file = (input.files as FileList)[0];
 
-    this.filename = file.name.substring(0, file.name.lastIndexOf('.')).replaceAll(/\.[^/.]+$/g, '').toLocaleLowerCase();
+    this.filename = file.name
+      .substring(0, file.name.lastIndexOf('.'))
+      .replaceAll(/\.[^/.]+$/g, '')
+      .toLocaleLowerCase();
 
     if (file.name.endsWith('.csv')) {
       this.selectedDataType = 'csv';
@@ -73,9 +82,11 @@ export class ImportDialogComponent {
 
     const reader = new FileReader();
     reader.addEventListener(
-      "load",
+      'load',
       () => {
-        const fileConent = this.dataFilesParserService.parseCSV(reader.result as string);
+        const fileConent = this.dataFilesParserService.parseCSV(
+          reader.result as string,
+        );
 
         this.databaseManagerService.setTable(fileConent, this.filename);
       },

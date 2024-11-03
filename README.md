@@ -6,6 +6,5 @@
 [![Angular](https://img.shields.io/github/package-json/dependency-version/dplocki/datamancer/@angular/core?label=Angular&logo=angular)](https://angular.dev/)
 [![Angular Material](https://img.shields.io/npm/v/@angular/material?color=607D8B&label=Material&logo=angular)](https://material.angular.io/)
 
-
 The small project for experiments with [AlaSQL](https://github.com/AlaSQL/alasql) library.
 The library allows loading the data into memory, directly from browser, then manipulate them with using SQL query.

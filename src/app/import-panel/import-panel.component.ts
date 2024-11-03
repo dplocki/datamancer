@@ -35,8 +35,7 @@ export class ImportPanelComponent {
   private state: IImportPanelComponentState =
     new ImportPanelComponentStateParseJSON();
 
-  constructor(private dataFilesParserService: DataFilesParserService) {
-  }
+  constructor(private dataFilesParserService: DataFilesParserService) {}
 
   public get isBeforeParsing(): boolean {
     return !this.state.allowParse;
@@ -64,7 +63,9 @@ export class ImportPanelComponent {
         this.state = new ImportPanelComponentStateParseJSON();
         break;
       case DataFileFormat.CSV:
-        this.state = new ImportPanelComponentStateParseCSV(this.dataFilesParserService);
+        this.state = new ImportPanelComponentStateParseCSV(
+          this.dataFilesParserService,
+        );
         break;
     }
 
@@ -105,7 +106,6 @@ class ImportPanelComponentStateParseJSON extends ImportPanelComponentStateBefore
 }
 
 class ImportPanelComponentStateParseCSV extends ImportPanelComponentStateBeforeParse {
-
   constructor(private dataFilesParserService: DataFilesParserService) {
     super();
   }
