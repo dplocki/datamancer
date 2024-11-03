@@ -40,10 +40,10 @@ export class ImportDialogComponent {
   readonly dialogRef = inject(MatDialogRef<ImportDialogComponent>);
 
   public selectedFile: File | null = null;
-  public uploadProgress: number = 0;
-  public uploading: boolean = false;
-  public filename: string = '';
-  public selectedDataType: string = '';
+  public uploadProgress = 0;
+  public uploading = false;
+  public filename = '';
+  public selectedDataType = '';
 
   constructor(
     private dataFilesParserService: DataFilesParserService,

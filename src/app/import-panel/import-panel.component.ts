@@ -4,7 +4,6 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatButtonModule } from '@angular/material/button';
 import { TableViewComponent } from '../table-view/table-view.component';
 import { stringify } from 'csv-stringify/browser/esm/sync';
-import { parse } from 'csv-parse/browser/esm/sync';
 import { DataFileFormat } from '../utils/data.file.format';
 import { DataType } from '../utils/data.type';
 import { DataFilesParserService } from '../services/data-files-paser.service';

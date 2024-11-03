@@ -1,7 +1,14 @@
 <h2 mat-dialog-title>Import file</h2>
 
 <mat-dialog-content>
-  <div class="file-input-container" (click)="fileInput.click()">
+  <div
+    role="button"
+    tabindex="0"
+    class="file-input-container"
+    (click)="fileInput.click()"
+    (keyup)="fileInput.click()"
+    (keydown)="fileInput.click()"
+  >
     @if (!selectedFile) {
       <mat-label>Upload the file</mat-label>
     }
