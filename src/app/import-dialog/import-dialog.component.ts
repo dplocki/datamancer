@@ -44,6 +44,9 @@ export class ImportDialogComponent {
   public uploading = false;
   public filename = '';
   public selectedDataType = '';
+  public validation: Record<string, string | null> = {
+    selectedDataType: null,
+  };
 
   constructor(
     private dataFilesParserService: DataFilesParserService,
@@ -53,6 +56,8 @@ export class ImportDialogComponent {
   public onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     const file = (input.files as FileList)[0];
+
+    this.validation['selectedDataType'] = null;
 
     this.filename = file.name
       .substring(0, file.name.lastIndexOf('.'))
@@ -73,8 +78,15 @@ export class ImportDialogComponent {
     }
   }
 
-  public uploadFile(): void {
+  public uploadFile(event: Event): void {
     if (!this.selectedFile) {
+      event.preventDefault();
+      return;
+    }
+
+    if (this.selectedDataType === '') {
+      this.validation['selectedDataType'] = 'Select the import method';
+      event.preventDefault();
       return;
     }
 
@@ -102,6 +114,8 @@ export class ImportDialogComponent {
     this.uploading = false;
     this.filename = '';
     this.selectedDataType = '';
+
+    this.validation['selectedDataType'] = null;
 
     event.stopPropagation();
   }

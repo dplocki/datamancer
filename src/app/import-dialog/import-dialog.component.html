@@ -51,12 +51,16 @@
       <mat-option value="csv">CSV</mat-option>
       <mat-option value="json">JSON</mat-option>
     </mat-select>
+    @if (validation['selectedDataType']) {
+      <mat-error>{{validation['selectedDataType']}}</mat-error>
+    }
   </mat-form-field>
+
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button mat-dialog-close cdkFocusInitial (click)="uploadFile()">
+  <button mat-button mat-dialog-close cdkFocusInitial (click)="uploadFile($event)">
     Import
   </button>
 </mat-dialog-actions>
