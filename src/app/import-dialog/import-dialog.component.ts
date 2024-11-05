@@ -37,8 +37,6 @@ import { MatSelectModule } from '@angular/material/select';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ImportDialogComponent {
-  readonly dialogRef = inject(MatDialogRef<ImportDialogComponent>);
-
   public selectedFile: File | null = null;
   public uploadProgress = 0;
   public uploading = false;
@@ -51,7 +49,15 @@ export class ImportDialogComponent {
   constructor(
     private dataFilesParserService: DataFilesParserService,
     private databaseManagerService: DatabaseManagerService,
-  ) {}
+    public dialogRef: MatDialogRef<ImportDialogComponent>,
+  ) {
+    this.dialogRef.disableClose = true;
+    this.dialogRef.beforeClosed().subscribe((result) => {
+      if (this.validation['selectedDataType'] != null) {
+        result.preventDefault();
+      }
+    });
+  }
 
   public onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -78,15 +84,13 @@ export class ImportDialogComponent {
     }
   }
 
-  public uploadFile(event: Event): void {
+  public uploadFile(): void {
     if (!this.selectedFile) {
-      event.preventDefault();
       return;
     }
 
     if (this.selectedDataType === '') {
       this.validation['selectedDataType'] = 'Select the import method';
-      event.preventDefault();
       return;
     }
 
@@ -106,6 +110,7 @@ export class ImportDialogComponent {
     );
 
     reader.readAsText(this.selectedFile);
+    this.dialogRef.close(true);
   }
 
   public resetForm(event: Event): void {
