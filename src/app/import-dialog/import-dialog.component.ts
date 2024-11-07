@@ -11,7 +11,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { DataFilesParserService } from '../services/data-files-paser.service';
 import { DatabaseManagerService } from '../services/database-manager.service';
 import { MatIconModule } from '@angular/material/icon';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
@@ -31,17 +31,24 @@ import { MatSelectModule } from '@angular/material/select';
     MatInputModule,
     MatSelectModule,
     MatProgressBarModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    FormsModule,
+    ReactiveFormsModule,MatInputModule
+
   ],
   templateUrl: './import-dialog.component.html',
   styleUrl: './import-dialog.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ImportDialogComponent {
+  readonly tableName = new FormControl('', [Validators.required]);
+  readonly dataTyp = new FormControl('', [Validators.required]);
+
   public selectedFile: File | null = null;
   public uploadProgress = 0;
   public uploading = false;
   public filename = '';
-  public selectedDataType = '';
   public validation: Record<string, string | null> = {
     selectedDataType: null,
   };
@@ -71,11 +78,11 @@ export class ImportDialogComponent {
       .toLocaleLowerCase();
 
     if (file.name.endsWith('.csv')) {
-      this.selectedDataType = 'csv';
+      this.dataTyp.setValue('csv');
     } else if (file.name.endsWith('.json')) {
-      this.selectedDataType = 'json';
+      this.dataTyp.setValue('json');
     } else {
-      this.selectedDataType = '';
+      this.dataTyp.setValue('');
     }
 
     if (file) {
@@ -89,7 +96,7 @@ export class ImportDialogComponent {
       return;
     }
 
-    if (this.selectedDataType === '') {
+    if (this.dataTyp.hasError('required')) {
       this.validation['selectedDataType'] = 'Select the import method';
       return;
     }
@@ -118,7 +125,6 @@ export class ImportDialogComponent {
     this.uploadProgress = 0;
     this.uploading = false;
     this.filename = '';
-    this.selectedDataType = '';
 
     this.validation['selectedDataType'] = null;
 
