@@ -16,6 +16,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 
+interface IValidationMessages {
+  tableName: string | null,
+  dataType: string | null,
+};
+
 @Component({
   selector: 'app-import-dialog',
   standalone: true,
@@ -29,13 +34,9 @@ import { MatSelectModule } from '@angular/material/select';
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
-    MatSelectModule,
     MatProgressBarModule,
-    MatFormFieldModule,
     MatSelectModule,
-    FormsModule,
-    ReactiveFormsModule,MatInputModule
-
+    ReactiveFormsModule,
   ],
   templateUrl: './import-dialog.component.html',
   styleUrl: './import-dialog.component.scss',
@@ -49,8 +50,9 @@ export class ImportDialogComponent {
   public uploadProgress = 0;
   public uploading = false;
   public filename = '';
-  public validation: Record<string, string | null> = {
-    selectedDataType: null,
+  public validation: IValidationMessages = {
+    tableName: null,
+    dataType: null,
   };
 
   constructor(
@@ -60,7 +62,7 @@ export class ImportDialogComponent {
   ) {
     this.dialogRef.disableClose = true;
     this.dialogRef.beforeClosed().subscribe((result) => {
-      if (this.validation['selectedDataType'] != null) {
+      if (this.validation.dataType != null) {
         result.preventDefault();
       }
     });
@@ -70,12 +72,12 @@ export class ImportDialogComponent {
     const input = event.target as HTMLInputElement;
     const file = (input.files as FileList)[0];
 
-    this.validation['selectedDataType'] = null;
+    this.validation.dataType = null;
 
-    this.filename = file.name
+    this.tableName.setValue(file.name
       .substring(0, file.name.lastIndexOf('.'))
       .replaceAll(/\.[^/.]+$/g, '')
-      .toLocaleLowerCase();
+      .toLocaleLowerCase());
 
     if (file.name.endsWith('.csv')) {
       this.dataTyp.setValue('csv');
@@ -84,6 +86,8 @@ export class ImportDialogComponent {
     } else {
       this.dataTyp.setValue('');
     }
+
+    this.dataTyp.markAllAsTouched();
 
     if (file) {
       this.selectedFile = file;
@@ -97,7 +101,7 @@ export class ImportDialogComponent {
     }
 
     if (this.dataTyp.hasError('required')) {
-      this.validation['selectedDataType'] = 'Select the import method';
+      this.validation.dataType = 'Select the import method';
       return;
     }
 
@@ -126,7 +130,10 @@ export class ImportDialogComponent {
     this.uploading = false;
     this.filename = '';
 
-    this.validation['selectedDataType'] = null;
+    this.validation = {
+      dataType: null,
+      tableName: null,
+    };
 
     event.stopPropagation();
   }
