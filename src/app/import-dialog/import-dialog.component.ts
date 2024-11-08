@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import {
   MatDialogActions,
@@ -11,7 +11,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { DataFilesParserService } from '../services/data-files-paser.service';
 import { DatabaseManagerService } from '../services/database-manager.service';
 import { MatIconModule } from '@angular/material/icon';
-import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
@@ -25,7 +25,6 @@ interface IValidationMessages {
   selector: 'app-import-dialog',
   standalone: true,
   imports: [
-    FormsModule,
     MatButtonModule,
     MatDialogActions,
     MatDialogClose,
