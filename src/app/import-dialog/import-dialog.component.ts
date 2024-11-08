@@ -7,13 +7,11 @@ import {
   MatDialogRef,
   MatDialogTitle,
 } from '@angular/material/dialog';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { DataFilesParserService } from '../services/data-files-paser.service';
 import { DatabaseManagerService } from '../services/database-manager.service';
 import { MatIconModule } from '@angular/material/icon';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 
 interface IValidationMessages {
@@ -27,13 +25,10 @@ interface IValidationMessages {
   imports: [
     MatButtonModule,
     MatDialogActions,
-    MatDialogClose,
     MatDialogContent,
     MatDialogTitle,
-    MatFormFieldModule,
     MatIconModule,
     MatInputModule,
-    MatProgressBarModule,
     MatSelectModule,
     ReactiveFormsModule,
   ],
