@@ -42,6 +42,9 @@
         <mat-icon>close</mat-icon>
       </button>
     }
+    @if (dataTyp.invalid) {
+      <mat-error>{{validation.tableName}}</mat-error>
+    }
   </mat-form-field>
 
   <mat-form-field>
@@ -52,7 +55,7 @@
       <mat-option value="json">JSON</mat-option>
     </mat-select>
     @if (dataTyp.invalid) {
-      <mat-error>{{validation['selectedDataType']}}</mat-error>
+      <mat-error>{{validation.dataType}}</mat-error>
     }
   </mat-form-field>
 
