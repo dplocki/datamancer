@@ -49,7 +49,6 @@ export class ImportDialogComponent {
   public selectedFile: File | null = null;
   public uploadProgress = 0;
   public uploading = false;
-  public filename = '';
   public validation: IValidationMessages = {
     tableName: null,
     dataType: null,
@@ -115,7 +114,7 @@ export class ImportDialogComponent {
           reader.result as string,
         );
 
-        this.databaseManagerService.setTable(fileConent, this.filename);
+        this.databaseManagerService.setTable(fileConent, this.tableName.getRawValue()!);
       },
       false,
     );
@@ -128,7 +127,6 @@ export class ImportDialogComponent {
     this.selectedFile = null;
     this.uploadProgress = 0;
     this.uploading = false;
-    this.filename = '';
 
     this.validation = {
       dataType: null,
