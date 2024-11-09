@@ -43,7 +43,7 @@
       </button>
     }
     @if (tableName.invalid) {
-      <mat-error>{{validation.tableName}}</mat-error>
+      <mat-error>{{ validation.tableName }}</mat-error>
     }
   </mat-form-field>
 
@@ -55,15 +55,12 @@
       <mat-option value="json">JSON</mat-option>
     </mat-select>
     @if (dataTyp.invalid) {
-      <mat-error>{{validation.dataType}}</mat-error>
+      <mat-error>{{ validation.dataType }}</mat-error>
     }
   </mat-form-field>
-
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
   <button mat-button>Cancel</button>
-  <button mat-button cdkFocusInitial (click)="uploadFile()">
-    Import
-  </button>
+  <button mat-button cdkFocusInitial (click)="uploadFile()">Import</button>
 </mat-dialog-actions>

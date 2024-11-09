@@ -15,9 +15,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 
 interface IValidationMessages {
-  tableName: string | null,
-  dataType: string | null,
-};
+  tableName: string | null;
+  dataType: string | null;
+}
 
 @Component({
   selector: 'app-import-dialog',
@@ -67,10 +67,12 @@ export class ImportDialogComponent {
 
     this.validation.dataType = null;
 
-    this.tableName.setValue(file.name
-      .substring(0, file.name.lastIndexOf('.'))
-      .replaceAll(/\.[^/.]+$/g, '')
-      .toLocaleLowerCase());
+    this.tableName.setValue(
+      file.name
+        .substring(0, file.name.lastIndexOf('.'))
+        .replaceAll(/\.[^/.]+$/g, '')
+        .toLocaleLowerCase(),
+    );
 
     if (file.name.endsWith('.csv')) {
       this.dataTyp.setValue('csv');
@@ -108,7 +110,10 @@ export class ImportDialogComponent {
           reader.result as string,
         );
 
-        this.databaseManagerService.setTable(fileConent, this.tableName.getRawValue()!);
+        this.databaseManagerService.setTable(
+          fileConent,
+          this.tableName.getRawValue()!,
+        );
       },
       false,
     );
