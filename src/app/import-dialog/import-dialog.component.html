@@ -61,6 +61,6 @@
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-  <button mat-button>Cancel</button>
+  <button mat-button (click)="dialogRef.close()">Cancel</button>
   <button mat-button cdkFocusInitial (click)="uploadFile()">Import</button>
 </mat-dialog-actions>
