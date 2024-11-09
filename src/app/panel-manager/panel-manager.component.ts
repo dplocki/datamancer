@@ -53,6 +53,11 @@ export class PanelManagerComponent implements OnInit {
     this.tabs.splice(index, 1);
   }
 
+  public onCloseTab(index: number, event: Event): void {
+    this.closeTab(index);
+    event.stopPropagation();
+  }
+
   private onUserSelectTableName(
     event: MetaData<IEventDataUserSelectTableOrColumn>,
   ): void {

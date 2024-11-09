@@ -5,9 +5,7 @@
         <mat-tab [label]="tab.name">
           <ng-template mat-tab-label>
             {{ tab.name }}
-            <mat-icon (click)="closeTab(index); $event.stopPropagation()"
-              >close</mat-icon
-            >
+            <mat-icon (click)="onCloseTab(index, $event)">close</mat-icon>
           </ng-template>
 
           <app-query-panel [query]="tab.initializeParamater" />
