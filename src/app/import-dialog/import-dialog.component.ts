@@ -93,7 +93,6 @@ export class ImportDialogComponent {
       return;
     }
 
-
     this.uploading = true;
 
     const reader = new FileReader();
