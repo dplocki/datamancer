@@ -1,4 +1,8 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+} from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import {
   MatDialogActions,
@@ -59,6 +63,14 @@ export class ImportDialogComponent {
 
     this.tableName.valueChanges.subscribe(this.onTableNameChange.bind(this));
     this.dataType.valueChanges.subscribe(this.onDataTypeChange.bind(this));
+  }
+
+  public canParse() {
+    return (
+      !this.tableName.invalid &&
+      !this.dataType.invalid &&
+      this.selectedFile != null
+    );
   }
 
   public onFileSelected(event: Event): void {
