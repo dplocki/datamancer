@@ -17,3 +17,15 @@ mat-dialog-content {
 .file-input-container button {
   margin-left: auto;
 }
+
+pre {
+  background-color: #2e3b4e;
+  color: #ffffff;
+  border-radius: 8px;
+  padding: 16px;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: smaller;
+  white-space: pre-wrap;
+  overflow: auto;
+}
