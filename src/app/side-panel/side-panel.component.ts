@@ -15,6 +15,10 @@ import { ImportDialogComponent } from '../import-dialog/import-dialog.component'
 export class SidePanelComponent {
   readonly dialog = inject(MatDialog);
 
+  constructor() {
+    this.onImportClick();
+  }
+
   public onImportClick() {
     this.dialog.open(ImportDialogComponent, {
       width: '80%',
