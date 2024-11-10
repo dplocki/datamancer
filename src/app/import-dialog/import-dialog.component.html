@@ -58,6 +58,10 @@
       <mat-error>{{ validation.dataType }}</mat-error>
     }
   </mat-form-field>
+
+  @if (validation.parsingError !== null) {
+    <pre>{{ validation.parsingError }}</pre>
+  }
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import {
   MatDialogActions,
@@ -52,6 +52,7 @@ export class ImportDialogComponent {
   constructor(
     private dataFilesParserService: DataFilesParserService,
     private databaseManagerService: DatabaseManagerService,
+    private changeDetectorRef: ChangeDetectorRef,
     public dialogRef: MatDialogRef<ImportDialogComponent>,
   ) {
     this.dialogRef.disableClose = true;
@@ -91,7 +92,7 @@ export class ImportDialogComponent {
   }
 
   public uploadFile(): void {
-    if (!this.selectedFile) {
+    if (!this.selectedFile || this.tableName.invalid || this.dataType.invalid) {
       return;
     }
 
@@ -101,24 +102,29 @@ export class ImportDialogComponent {
     reader.addEventListener(
       'load',
       () => {
-        const fileConent = this.dataFilesParserService.parseCSV(
-          reader.result as string,
-        );
-
         try {
+          const fileConent = this.dataFilesParserService.parseCSV(
+            reader.result as string,
+          );
+
           this.databaseManagerService.setTable(
             fileConent,
             this.tableName.getRawValue()!,
           );
-        } catch(error) {
-          this.validation
+
+          this.dialogRef.close(true);
+        } catch (error) {
+          this.validation = {
+            ...this.validation,
+            parsingError: String(error),
+          };
+          this.changeDetectorRef.markForCheck();
         }
       },
       false,
     );
 
     reader.readAsText(this.selectedFile);
-    this.dialogRef.close(true);
   }
 
   public onFormReset(event: Event): void {
