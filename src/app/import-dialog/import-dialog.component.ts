@@ -16,6 +16,7 @@ import { MatSelectModule } from '@angular/material/select';
 interface IValidationMessages {
   tableName: string | null;
   dataType: string | null;
+  parsingError: string | null;
 }
 
 @Component({
@@ -45,6 +46,7 @@ export class ImportDialogComponent {
   public validation: IValidationMessages = {
     tableName: null,
     dataType: null,
+    parsingError: null,
   };
 
   constructor(
@@ -103,10 +105,14 @@ export class ImportDialogComponent {
           reader.result as string,
         );
 
-        this.databaseManagerService.setTable(
-          fileConent,
-          this.tableName.getRawValue()!,
-        );
+        try {
+          this.databaseManagerService.setTable(
+            fileConent,
+            this.tableName.getRawValue()!,
+          );
+        } catch(error) {
+          this.validation
+        }
       },
       false,
     );
@@ -120,10 +126,10 @@ export class ImportDialogComponent {
     this.uploadProgress = 0;
     this.uploading = false;
 
-    this.validation = {
-      dataType: null,
-      tableName: null,
-    };
+    this.validation = Object.keys(this.validation).reduce((result, key) => {
+      (result as IValidationMessages)[key as keyof IValidationMessages] = null;
+      return result;
+    }, {} as IValidationMessages);
 
     event.stopPropagation();
   }
