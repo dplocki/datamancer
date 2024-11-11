@@ -43,7 +43,10 @@ interface IValidationMessages {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ImportDialogComponent {
-  readonly tableName = new FormControl('', [Validators.required]);
+  readonly tableName = new FormControl('', [
+    Validators.required,
+    Validators.pattern(/^[a-zA-Z][a-zA-Z0-9_]*$/)
+  ]);
   readonly dataType = new FormControl('', [Validators.required]);
 
   public selectedFile: File | null = null;
@@ -157,6 +160,8 @@ export class ImportDialogComponent {
   public onTableNameChange() {
     if (this.tableName.hasError('required')) {
       this.validation.tableName = 'Provide the table name';
+    } else if (this.tableName.hasError('pattern')) {
+      this.validation.tableName = 'Provide the valid SQL table name';
     } else {
       this.validation.tableName = null;
     }
