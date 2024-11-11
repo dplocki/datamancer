@@ -16,6 +16,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { ErrorDisplayComponent } from '../error-display/error-display.component';
 
 interface IValidationMessages {
   tableName: string | null;
@@ -27,6 +28,7 @@ interface IValidationMessages {
   selector: 'app-import-dialog',
   standalone: true,
   imports: [
+    ErrorDisplayComponent,
     MatButtonModule,
     MatDialogActions,
     MatDialogContent,

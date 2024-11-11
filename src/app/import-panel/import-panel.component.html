@@ -16,9 +16,6 @@
 @if (isBeforeParsing) {
   <app-table-view [data]="data"></app-table-view>
 } @else {
-  @if (parsingError) {
-    <pre>{{ parsingError }}</pre>
-  }
-
+  <app-error-display [message]="parsingError" />
   <textarea [(ngModel)]="rawText"></textarea>
 }

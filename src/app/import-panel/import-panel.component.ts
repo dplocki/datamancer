@@ -7,6 +7,7 @@ import { stringify } from 'csv-stringify/browser/esm/sync';
 import { DataFileFormat } from '../utils/data.file.format';
 import { DataType } from '../utils/data.type';
 import { DataFilesParserService } from '../services/data-files-paser.service';
+import { ErrorDisplayComponent } from "../error-display/error-display.component";
 
 const PARSING_STATE = {
   Allow: true,
@@ -17,11 +18,13 @@ const PARSING_STATE = {
   selector: 'app-import-panel',
   standalone: true,
   imports: [
+    ErrorDisplayComponent,
     FormsModule,
     TableViewComponent,
     MatButtonModule,
     MatButtonToggleModule,
-  ],
+    ErrorDisplayComponent
+],
   templateUrl: './import-panel.component.html',
   styleUrl: './import-panel.component.scss',
 })

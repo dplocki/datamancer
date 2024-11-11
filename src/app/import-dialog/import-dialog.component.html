@@ -59,9 +59,7 @@
     }
   </mat-form-field>
 
-  @if (validation.parsingError !== null) {
-    <pre>{{ validation.parsingError }}</pre>
-  }
+  <app-error-display [message]="validation.parsingError" />
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
