@@ -1,29 +1,33 @@
 import { Component } from '@angular/core';
-import { HeaderComponent } from '../header/header.component';
-import { FooterComponent } from '../footer/footer.component';
 import { SidePanelComponent } from '../side-panel/side-panel.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { PanelManagerComponent } from '../panel-manager/panel-manager.component';
+import { HeaderComponent } from "../header/header.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
   template: `
     <app-header />
-    <main>
-      <app-panel-manager />
-      <aside>
+    <mat-drawer-container>
+      <mat-drawer #drawer mode="side">
         <app-side-panel />
-      </aside>
-    </main>
-    <app-footer />
+      </mat-drawer>
+      <mat-drawer-content>
+        <section>
+          <button mat-raised-button (click)="drawer.toggle()">Toggle drawer</button>
+          <app-panel-manager />
+        </section>
+      </mat-drawer-content>
+    </mat-drawer-container>
   `,
   styleUrls: ['app.component.scss'],
   imports: [
-    HeaderComponent,
-    FooterComponent,
+    MatSidenavModule,
     SidePanelComponent,
     PanelManagerComponent,
-  ],
+    HeaderComponent
+],
 })
 export class AppComponent {
   title = 'Datamancer';
