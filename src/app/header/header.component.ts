@@ -21,4 +21,8 @@ export class HeaderComponent {
   public runNewQuery(): void {
     this.eventBus.cast('user:create:newquerytab');
   }
+
+  public toggleTableListPanel(): void {
+    this.eventBus.cast('user:tablelist:toggle')
+  }
 }

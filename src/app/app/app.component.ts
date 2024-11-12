@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { SidePanelComponent } from '../side-panel/side-panel.component';
-import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav';
 import { PanelManagerComponent } from '../panel-manager/panel-manager.component';
 import { HeaderComponent } from "../header/header.component";
+import { NgEventBus } from 'ng-event-bus';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,6 @@ import { HeaderComponent } from "../header/header.component";
       </mat-drawer>
       <mat-drawer-content>
         <section>
-          <button mat-raised-button (click)="drawer.toggle()">Toggle drawer</button>
           <app-panel-manager />
         </section>
       </mat-drawer-content>
@@ -30,5 +30,14 @@ import { HeaderComponent } from "../header/header.component";
 ],
 })
 export class AppComponent {
-  title = 'Datamancer';
+  public title = 'Datamancer';
+
+  @ViewChild('drawer') drawer!: MatDrawer;
+
+  public constructor(private eventBus: NgEventBus) {
+    this.eventBus.on('user:tablelist:toggle').subscribe({
+      next: () => this.drawer.toggle(),
+    });
+  }
+
 }
