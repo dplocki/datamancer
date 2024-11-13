@@ -6,12 +6,6 @@
   <mat-icon>menu</mat-icon>
 </button>
 
-<header>
-  <button mat-button [matMenuTriggerFor]="import_menu">Import from</button>
-  <button mat-button (click)="runNewQuery()">New query</button>
-</header>
-
-<mat-menu #import_menu="matMenu">
-  <button mat-menu-item>JSON</button>
-  <button mat-menu-item>CSV</button>
-</mat-menu>
+<button mat-icon-button (click)="runNewQuery()" aria-label="Add new query tab">
+  <mat-icon>terminal</mat-icon>
+</button>
