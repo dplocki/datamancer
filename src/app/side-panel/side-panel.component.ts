@@ -1,9 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatButtonModule } from '@angular/material/button';
 import { TablesTreeComponent } from '../tables-tree/tables-tree.component';
-import { MatDialog } from '@angular/material/dialog';
-import { ImportDialogComponent } from '../import-dialog/import-dialog.component';
 
 @Component({
   selector: 'app-side-panel',
@@ -13,17 +11,4 @@ import { ImportDialogComponent } from '../import-dialog/import-dialog.component'
   styleUrl: './side-panel.component.scss',
 })
 export class SidePanelComponent {
-  readonly dialog = inject(MatDialog);
-
-  constructor() {
-    this.onImportClick();
-  }
-
-  public onImportClick() {
-    this.dialog.open(ImportDialogComponent, {
-      width: '80%',
-      enterAnimationDuration: '400ms',
-      exitAnimationDuration: '400ms',
-    });
-  }
 }
