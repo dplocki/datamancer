@@ -7,9 +7,7 @@ describe('ErrorDisplayComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        ErrorDisplayComponent,
-      ],
+      imports: [ErrorDisplayComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ErrorDisplayComponent);

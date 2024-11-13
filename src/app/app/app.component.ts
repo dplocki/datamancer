@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { SidePanelComponent } from '../side-panel/side-panel.component';
 import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav';
 import { PanelManagerComponent } from '../panel-manager/panel-manager.component';
-import { HeaderComponent } from "../header/header.component";
+import { HeaderComponent } from '../header/header.component';
 import { NgEventBus } from 'ng-event-bus';
 
 @Component({
@@ -26,8 +26,8 @@ import { NgEventBus } from 'ng-event-bus';
     MatSidenavModule,
     SidePanelComponent,
     PanelManagerComponent,
-    HeaderComponent
-],
+    HeaderComponent,
+  ],
 })
 export class AppComponent {
   public title = 'Datamancer';
@@ -39,5 +39,4 @@ export class AppComponent {
       next: () => this.drawer.toggle(),
     });
   }
-
 }

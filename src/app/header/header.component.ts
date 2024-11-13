@@ -7,11 +7,7 @@ import { NgEventBus } from 'ng-event-bus';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [
-    MatButtonModule,
-    MatIconModule,
-    MatMenuModule,
-  ],
+  imports: [MatButtonModule, MatIconModule, MatMenuModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
@@ -23,6 +19,6 @@ export class HeaderComponent {
   }
 
   public toggleTableListPanel(): void {
-    this.eventBus.cast('user:tablelist:toggle')
+    this.eventBus.cast('user:tablelist:toggle');
   }
 }

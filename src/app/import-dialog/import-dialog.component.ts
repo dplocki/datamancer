@@ -45,7 +45,7 @@ interface IValidationMessages {
 export class ImportDialogComponent {
   readonly tableName = new FormControl('', [
     Validators.required,
-    Validators.pattern(/^[a-zA-Z][a-zA-Z0-9_]*$/)
+    Validators.pattern(/^[a-zA-Z][a-zA-Z0-9_]*$/),
   ]);
   readonly dataType = new FormControl('', [Validators.required]);
 
