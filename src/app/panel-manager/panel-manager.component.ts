@@ -40,6 +40,12 @@ export class PanelManagerComponent implements OnInit {
         this.tabs.push(new QueryTab(this.buildTabName(), ''));
       },
     });
+
+    this.eventBus.on('user:create:newparsingtab').subscribe({
+      next: (): void => {
+        this.tabs.push(new ImportTab('import tab'));
+      },
+    });
   }
 
   public ngOnInit(): void {

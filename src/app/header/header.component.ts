@@ -36,7 +36,6 @@ export class HeaderComponent {
   }
 
   public adddNewParseTab(): void {
-
-    this.eventBus.cast('user:tablelist:toggle');
+    this.eventBus.cast('user:create:newparsingtab');
   }
 }
