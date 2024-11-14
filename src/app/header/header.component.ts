@@ -16,7 +16,8 @@ import { ImportDialogComponent } from '../import-dialog/import-dialog.component'
 export class HeaderComponent {
   constructor(
     private dialog: MatDialog,
-    private eventBus: NgEventBus) {}
+    private eventBus: NgEventBus,
+  ) {}
 
   public runNewQuery(): void {
     this.eventBus.cast('user:create:newquerytab');
