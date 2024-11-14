@@ -34,4 +34,9 @@ export class HeaderComponent {
       exitAnimationDuration: '400ms',
     });
   }
+
+  public adddNewParseTab(): void {
+
+    this.eventBus.cast('user:tablelist:toggle');
+  }
 }
