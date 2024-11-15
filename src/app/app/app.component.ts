@@ -11,7 +11,7 @@ import { NgEventBus } from 'ng-event-bus';
   template: `
     <app-header />
     <mat-drawer-container>
-      <mat-drawer #drawer mode="side">
+      <mat-drawer #drawer mode="side" position="end">
         <app-side-panel />
       </mat-drawer>
       <mat-drawer-content>
