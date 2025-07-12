@@ -36,7 +36,7 @@ export class HeaderComponent {
     });
   }
 
-  public adddNewParseTab(): void {
+  public addNewParseTab(): void {
     this.eventBus.cast('user:create:newparsingtab');
   }
 }
