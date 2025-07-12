@@ -21,11 +21,11 @@ export class HeaderComponent {
   ) {}
 
   public runNewQuery(): void {
-    this.eventBus.cast('user:create:newquerytab');
+    this.eventBus.cast('user:create:new-query-tab');
   }
 
   public toggleTableListPanel(): void {
-    this.eventBus.cast('user:tablelist:toggle');
+    this.eventBus.cast('user:table-list:toggle');
   }
 
   public showImportDialog(): void {
@@ -37,6 +37,6 @@ export class HeaderComponent {
   }
 
   public addNewParseTab(): void {
-    this.eventBus.cast('user:create:newparsingtab');
+    this.eventBus.cast('user:create:new-parsing-tab');
   }
 }

@@ -35,7 +35,7 @@ export class AppComponent {
   @ViewChild('drawer') drawer!: MatDrawer;
 
   public constructor(private eventBus: NgEventBus) {
-    this.eventBus.on('user:tablelist:toggle').subscribe({
+    this.eventBus.on('user:table-list:toggle').subscribe({
       next: () => this.drawer.toggle(),
     });
   }

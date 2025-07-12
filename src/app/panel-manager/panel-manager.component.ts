@@ -35,13 +35,13 @@ export class PanelManagerComponent implements OnInit {
         ),
     });
 
-    this.eventBus.on('user:create:newquerytab').subscribe({
+    this.eventBus.on('user:create:new-query-tab').subscribe({
       next: (): void => {
         this.tabs.push(new QueryTab(this.buildTabName(), ''));
       },
     });
 
-    this.eventBus.on('user:create:newparsingtab').subscribe({
+    this.eventBus.on('user:create:new-parsing-tab').subscribe({
       next: (): void => {
         this.tabs.push(new ImportTab('import tab'));
       },
