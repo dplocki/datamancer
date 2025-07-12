@@ -2,11 +2,17 @@
   mat-icon-button
   aria-label="Show table list"
   (click)="toggleTableListPanel()"
+  matTooltip="Show table list"
 >
   <mat-icon>menu</mat-icon>
 </button>
 
-<button mat-icon-button (click)="runNewQuery()" aria-label="Add new query tab">
+<button
+  mat-icon-button
+  (click)="runNewQuery()"
+  aria-label="Add new query tab"
+  matTooltip="Add new query tab"
+>
   <mat-icon>terminal</mat-icon>
 </button>
 
@@ -14,6 +20,7 @@
   mat-icon-button
   (click)="showImportDialog()"
   aria-label="Show import dialog"
+  matTooltip="Show import dialog"
 >
   <mat-icon>input</mat-icon>
 </button>
@@ -22,6 +29,7 @@
   mat-icon-button
   (click)="adddNewParseTab()"
   aria-label="Add parsing tab"
+  matTooltip="Add parsing tab"
 >
   <mat-icon>content_paste_go</mat-icon>
 </button>
