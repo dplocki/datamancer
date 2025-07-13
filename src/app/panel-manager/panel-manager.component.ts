@@ -28,7 +28,7 @@ export class PanelManagerComponent implements OnInit {
   public TabType = TabType;
 
   public constructor(private eventBus: NgEventBus) {
-    this.eventBus.on('user:select:tablename').subscribe({
+    this.eventBus.on('user:select:table-name').subscribe({
       next: (event: MetaData<unknown>) =>
         this.onUserSelectTableName(
           event as MetaData<IEventDataUserSelectTableOrColumn>,

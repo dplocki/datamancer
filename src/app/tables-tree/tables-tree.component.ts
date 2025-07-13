@@ -108,7 +108,7 @@ export class TablesTreeComponent {
   public hasChild = (_: number, node: DynamicFlatNode) => !node.parent;
 
   public userSelectTable(node: DynamicFlatNode): void {
-    this.eventBus.cast('user:select:tablename', {
+    this.eventBus.cast('user:select:table-name', {
       table: node.label,
     } as IEventDataUserSelectTableOrColumn);
   }
